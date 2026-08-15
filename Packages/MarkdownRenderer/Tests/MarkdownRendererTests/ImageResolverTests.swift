@@ -9,7 +9,7 @@ final class ImageResolverTests: XCTestCase {
     }
 
     func testRelativeImageResolution() {
-        let base = URL(fileURLWithPath: "/Users/test/Documents")
+        let base = URL(fileURLWithPath: "/Users/test/Documents", isDirectory: true)
         let raw = "images/diagram.png"
         let resolved = ImageResolver.resolveImageSource(rawPath: raw, baseURL: base)
         XCTAssertTrue(resolved.contains("diagram.png"))
@@ -17,9 +17,19 @@ final class ImageResolverTests: XCTestCase {
     }
 
     func testPercentEncodedPathResolution() {
-        let base = URL(fileURLWithPath: "/Users/test/Documents")
+        let base = URL(fileURLWithPath: "/Users/test/Documents", isDirectory: true)
         let raw = "my%20folder/image.png"
         let resolved = ImageResolver.resolveImageSource(rawPath: raw, baseURL: base)
         XCTAssertTrue(resolved.contains("my folder/image.png") || resolved.contains("my%20folder/image.png"))
+    }
+
+    func testLocalFileEmbeddingAsDataURI() {
+        let currentDir = URL(fileURLWithPath: #file).deletingLastPathComponent()
+        let fixtureURL = currentDir.appendingPathComponent("Fixtures/assets/local-image-test.png")
+
+        if FileManager.default.fileExists(atPath: fixtureURL.path) {
+            let resolved = ImageResolver.resolveImageSource(rawPath: "assets/local-image-test.png", baseURL: currentDir.appendingPathComponent("Fixtures"))
+            XCTAssertTrue(resolved.hasPrefix("data:image/png;base64,"), "Local existing image should be embedded as Base64 data URI for sandbox-safe preview")
+        }
     }
 }

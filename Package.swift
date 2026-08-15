@@ -10,10 +10,15 @@ let package = Package(
         .library(name: "MarkdownRenderer", targets: ["MarkdownRenderer"]),
         .library(name: "MarkdownFinderCore", targets: ["MarkdownFinderCore"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/swiftlang/swift-markdown.git", exact: "0.8.0")
+    ],
     targets: [
         .target(
             name: "MarkdownRenderer",
+            dependencies: [
+                .product(name: "Markdown", package: "swift-markdown")
+            ],
             path: "Packages/MarkdownRenderer/Sources/MarkdownRenderer"
         ),
         .target(
@@ -30,7 +35,10 @@ let package = Package(
         .testTarget(
             name: "MarkdownRendererTests",
             dependencies: ["MarkdownRenderer"],
-            path: "Packages/MarkdownRenderer/Tests/MarkdownRendererTests"
+            path: "Packages/MarkdownRenderer/Tests/MarkdownRendererTests",
+            resources: [
+                .copy("Fixtures")
+            ]
         )
     ]
 )

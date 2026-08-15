@@ -13,6 +13,9 @@ public enum MarkdownRenderer {
             options: options
         )
 
+        let mathCSS = options.enableMath ? "\n<style>\n\(EmbeddedScripts.katexCSS)\n</style>" : ""
+        let mathJS = options.enableMath ? "\n\(EmbeddedScripts.katexScript)" : ""
+
         let completeHTML = """
         <!DOCTYPE html>
         <html lang="en">
@@ -21,12 +24,12 @@ public enum MarkdownRenderer {
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
             \(theme.css)
-            </style>
+            </style>\(mathCSS)
         </head>
         <body>
             <main class="markdown-body">
                 \(bodyHTML)
-            </main>
+            </main>\(mathJS)
         </body>
         </html>
         """
