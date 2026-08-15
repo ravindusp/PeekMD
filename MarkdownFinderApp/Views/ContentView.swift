@@ -12,18 +12,22 @@ public struct ContentView: View {
             }
             .listStyle(.sidebar)
             .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 280)
+            .navigationTitle("PeekMD")
         } detail: {
-            switch state.selectedTab {
-            case .settings:
-                SettingsView()
-            case .locations:
-                LocationsView()
-            case .onboarding:
-                OnboardingView()
-            case .viewer:
-                DocumentViewerView()
+            Group {
+                switch state.selectedTab {
+                case .settings:
+                    SettingsView()
+                case .locations:
+                    LocationsView()
+                case .onboarding:
+                    OnboardingView()
+                case .viewer:
+                    DocumentViewerView()
+                }
             }
+            .navigationTitle(state.selectedTab.rawValue)
         }
-        .frame(minWidth: 800, minHeight: 550)
+        .frame(minWidth: 860, minHeight: 560)
     }
 }

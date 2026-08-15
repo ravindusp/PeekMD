@@ -1,13 +1,28 @@
 import SwiftUI
 import AppKit
 
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if !flag {
+            for window in sender.windows {
+                if window.identifier?.rawValue == "main-window" || window.title.contains("PeekMD") {
+                    window.makeKeyAndOrderFront(nil)
+                    return true
+                }
+            }
+        }
+        return true
+    }
+}
+
 @main
 struct MarkdownFinderApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var appState = AppState.shared
 
     var body: some Scene {
-        DocumentGroup(newDocument: MarkdownDocument()) { file in
-            MarkdownEditorView(document: file.$document, fileURL: file.fileURL)
+        Window("PeekMD", id: "main-window") {
+            ContentView()
                 .environmentObject(appState)
         }
         .windowToolbarStyle(.unified)
@@ -16,31 +31,29 @@ struct MarkdownFinderApp: App {
 
             CommandGroup(replacing: .appSettings) {
                 Button("Settings...") {
-                    openSettingsWindow()
+                    appState.selectedTab = .settings
+                    openMainWindow()
                 }
                 .keyboardShortcut(",", modifiers: .command)
             }
-
-            CommandGroup(after: .newItem) {
-                Button("Preferences & Extension Setup...") {
-                    openSettingsWindow()
-                }
-            }
         }
 
-        Settings {
-            ContentView()
+        DocumentGroup(newDocument: MarkdownDocument()) { file in
+            MarkdownEditorView(document: file.$document, fileURL: file.fileURL)
                 .environmentObject(appState)
         }
+        .windowToolbarStyle(.unified)
     }
 
-    private func openSettingsWindow() {
-        if #available(macOS 14.0, *) {
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        } else {
-            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+    private func openMainWindow() {
+        for window in NSApp.windows {
+            if window.identifier?.rawValue == "main-window" || window.title.contains("PeekMD") {
+                window.makeKeyAndOrderFront(nil)
+                NSApp.activate(ignoringOtherApps: true)
+                return
+            }
         }
         NSApp.activate(ignoringOtherApps: true)
     }
 }
+
