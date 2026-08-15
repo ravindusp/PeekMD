@@ -5,15 +5,15 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>Markdown Quick Look Extension</string>
+    <string>PeekMD Quick Look Extension</string>
     <key>CFBundleExecutable</key>
     <string>MarkdownQuickLookExtension</string>
     <key>CFBundleIdentifier</key>
-    <string>com.oneloop.MarkdownFinder.QuickLook</string>
+    <string>com.oneloop.PeekMD.QuickLook</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>MarkdownQuickLookExtension</string>
+    <string>PeekMDQuickLookExtension</string>
     <key>CFBundlePackageType</key>
     <string>XPC!</string>
     <key>CFBundleShortVersionString</key>

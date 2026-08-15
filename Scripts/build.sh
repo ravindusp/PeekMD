@@ -9,10 +9,10 @@ fi
 SDK_PATH=$(xcrun --sdk macosx --show-sdk-path)
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$PROJECT_DIR/build/Release"
-APP_DIR="$BUILD_DIR/MarkdownFinder.app"
+APP_DIR="$BUILD_DIR/PeekMD.app"
 PLUGINS_DIR="$APP_DIR/Contents/PlugIns"
 
-echo "=== Building Markdown Finder ==="
+echo "=== Building PeekMD ==="
 echo "Project Directory: $PROJECT_DIR"
 echo "SDK: $SDK_PATH"
 echo "Build Directory: $BUILD_DIR"
@@ -98,7 +98,7 @@ swiftc -O \
     -sdk "$SDK_PATH" \
     -target arm64-apple-macosx13.0 \
     -emit-executable \
-    -module-name MarkdownFinder \
+    -module-name PeekMD \
     -I "$RENDERER_BUILD_DIR/Modules" \
     -L "$RENDERER_BUILD_DIR" \
     -lMarkdownRenderer \
@@ -124,7 +124,7 @@ swiftc -O \
     "$PROJECT_DIR/MarkdownFinderApp/Views/ContentView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/MarkdownEditorView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.swift" \
-    -o "$APP_DIR/Contents/MacOS/MarkdownFinder"
+    -o "$APP_DIR/Contents/MacOS/PeekMD"
 
 # 5. Ad-Hoc Code Signing (inside-out)
 echo "--> Signing bundles..."

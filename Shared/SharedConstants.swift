@@ -2,9 +2,9 @@ import Foundation
 
 public enum SharedConstants {
     public static let appGroupIdentifier = "group.com.oneloop.markdownfinder"
-    public static let appBundleIdentifier = "com.oneloop.MarkdownFinder"
-    public static let finderExtensionIdentifier = "com.oneloop.MarkdownFinder.FinderSync"
-    public static let quickLookExtensionIdentifier = "com.oneloop.MarkdownFinder.QuickLook"
+    public static let appBundleIdentifier = "com.oneloop.PeekMD"
+    public static let finderExtensionIdentifier = "com.oneloop.PeekMD.FinderSync"
+    public static let quickLookExtensionIdentifier = "com.oneloop.PeekMD.QuickLook"
 
     public enum UserDefaultsKeys {
         public static let defaultFilename = "defaultFilename"

@@ -1,4 +1,4 @@
-name: MarkdownFinder
+name: PeekMD
 options:
   bundleIdPrefix: com.oneloop
   deploymentTarget:
@@ -20,7 +20,7 @@ packages:
     path: Packages/MarkdownRenderer
 
 targets:
-  MarkdownFinder:
+  PeekMD:
     type: application
     platform: macOS
     sources:
@@ -32,12 +32,12 @@ targets:
           - "**/.DS_Store"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.PeekMD
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: MarkdownFinderApp/MarkdownFinderApp.entitlements
         INFOPLIST_FILE: MarkdownFinderApp/Info.plist
         GENERATE_INFOPLIST_FILE: false
-        PRODUCT_NAME: MarkdownFinder
+        PRODUCT_NAME: PeekMD
         COMBINE_HIDPI_IMAGES: true
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
@@ -68,7 +68,7 @@ targets:
           - LocationManager.swift
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder.FinderSync
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.PeekMD.FinderSync
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: MarkdownFinderExtension/MarkdownFinderExtension.entitlements
         INFOPLIST_FILE: MarkdownFinderExtension/Info.plist
@@ -94,7 +94,7 @@ targets:
           - LocationManager.swift
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder.QuickLook
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.PeekMD.QuickLook
         CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements
         INFOPLIST_FILE: MarkdownQuickLookExtension/Info.plist

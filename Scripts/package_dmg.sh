@@ -8,7 +8,7 @@ fi
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$PROJECT_DIR/build/Release"
-APP_PATH="$BUILD_DIR/MarkdownFinder.app"
+APP_PATH="$BUILD_DIR/PeekMD.app"
 VERSION="0.1"
 DMG_NAME="PeekMD-v${VERSION}.dmg"
 DMG_PATH="$BUILD_DIR/$DMG_NAME"
@@ -40,8 +40,8 @@ create-dmg \
     --window-size 1024 768 \
     --text-size 14 \
     --icon-size 128 \
-    --icon "MarkdownFinder.app" 220 410 \
-    --hide-extension "MarkdownFinder.app" \
+    --icon "PeekMD.app" 220 410 \
+    --hide-extension "PeekMD.app" \
     --app-drop-link 800 410 \
     --no-internet-enable \
     --overwrite \
