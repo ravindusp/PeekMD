@@ -15,11 +15,36 @@ public struct SettingsView: View {
                         .foregroundColor(.secondary)
                 }
 
-                StatusBadgeView(
-                    title: "Finder Sync Extension",
-                    isEnabled: state.isFinderExtensionEnabled,
-                    subtitle: state.isFinderExtensionEnabled ? "Context menu is ready to create files in Finder." : "Enable under System Settings > Extensions > Finder Extensions."
-                )
+                VStack(alignment: .leading, spacing: 12) {
+                    StatusBadgeView(
+                        title: "Finder Sync Extension",
+                        isEnabled: state.isFinderExtensionEnabled,
+                        subtitle: state.isFinderExtensionEnabled ? "Context menu is ready to create files in Finder." : "Enable under System Settings > Extensions > Finder Extensions."
+                    )
+
+                    HStack(spacing: 12) {
+                        Button(action: {
+                            state.openSystemExtensionSettings()
+                        }) {
+                            Label("Extensions Settings...", systemImage: "arrow.up.forward.app")
+                        }
+                        .buttonStyle(.bordered)
+
+                        Button(action: {
+                            state.restartFinder()
+                        }) {
+                            Label("Relaunch Finder", systemImage: "arrow.counterclockwise")
+                        }
+                        .buttonStyle(.bordered)
+
+                        Button(action: {
+                            state.registerAndFixExtensions()
+                        }) {
+                            Label("Repair Extension", systemImage: "wrench.and.screwdriver")
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
 
                 Divider()
 

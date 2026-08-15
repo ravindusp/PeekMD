@@ -106,6 +106,16 @@ After installing, open PeekMD once and make sure its extensions are enabled in:
 
 **System Settings → General → Login Items & Extensions**
 
+> [!TIP]
+> **Enabling the Context Menu in Finder:**
+> 1. In **System Settings → Extensions → Finder Extensions**, check **PeekMD Extension**.
+> 2. Relaunch Finder so macOS loads the new extension:
+>    - In PeekMD, click **Relaunch Finder** (or run `killall Finder` in Terminal).
+> 3. If macOS blocks ad-hoc downloaded extensions from loading, run:
+>    ```bash
+>    xattr -cr /Applications/PeekMD.app && killall Finder
+>    ```
+
 ---
 
 ## Features

@@ -145,8 +145,9 @@ public final class SharedPreferences: @unchecked Sendable {
     public func resolvedMonitoredURLs() -> Set<URL> {
         var urls = Set<URL>()
 
-        // 1. Root and Real Home
+        // 1. Root, Users, and Real Home
         urls.insert(URL(fileURLWithPath: "/", isDirectory: true))
+        urls.insert(URL(fileURLWithPath: "/Users", isDirectory: true))
         let realHome = SharedPreferences.realUserHomeDirectory()
         urls.insert(realHome)
 
@@ -154,6 +155,13 @@ public final class SharedPreferences: @unchecked Sendable {
             urls.insert(realHome.appendingPathComponent("Desktop", isDirectory: true))
             urls.insert(realHome.appendingPathComponent("Documents", isDirectory: true))
             urls.insert(realHome.appendingPathComponent("Downloads", isDirectory: true))
+
+            let iCloud = realHome.appendingPathComponent("Library/Mobile Documents/com~apple~CloudDocs", isDirectory: true)
+            if FileManager.default.fileExists(atPath: iCloud.path) {
+                urls.insert(iCloud)
+                urls.insert(iCloud.appendingPathComponent("Documents", isDirectory: true))
+                urls.insert(iCloud.appendingPathComponent("Desktop", isDirectory: true))
+            }
         }
 
         if monitorExternalVolumes {

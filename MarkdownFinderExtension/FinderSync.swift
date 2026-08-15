@@ -16,14 +16,23 @@ final class FinderSync: FIFinderSync {
     private func updateMonitoredDirectories() {
         var urls = preferences.resolvedMonitoredURLs()
 
-        // Ensure root, real home, and standard folders are all explicitly included
+        // Ensure root, users, real home, and standard folders are all explicitly included
         let realHome = SharedPreferences.realUserHomeDirectory()
         urls.insert(URL(fileURLWithPath: "/", isDirectory: true))
+        urls.insert(URL(fileURLWithPath: "/Users", isDirectory: true))
         urls.insert(realHome)
         urls.insert(realHome.appendingPathComponent("Desktop", isDirectory: true))
         urls.insert(realHome.appendingPathComponent("Documents", isDirectory: true))
         urls.insert(realHome.appendingPathComponent("Downloads", isDirectory: true))
         urls.insert(URL(fileURLWithPath: "/Volumes", isDirectory: true))
+
+        // iCloud Drive folder if active
+        let iCloud = realHome.appendingPathComponent("Library/Mobile Documents/com~apple~CloudDocs", isDirectory: true)
+        if FileManager.default.fileExists(atPath: iCloud.path) {
+            urls.insert(iCloud)
+            urls.insert(iCloud.appendingPathComponent("Documents", isDirectory: true))
+            urls.insert(iCloud.appendingPathComponent("Desktop", isDirectory: true))
+        }
 
         FIFinderSyncController.default().directoryURLs = urls
         NSLog("[MarkdownFinderExtension] Monitoring %ld directories: %@", urls.count, urls.map { $0.path }.joined(separator: ", "))

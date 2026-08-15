@@ -30,15 +30,15 @@ public struct OnboardingView: View {
                             .foregroundColor(.white)
                             .clipShape(Circle())
 
-                        Text("Enable Finder Extension in macOS")
+                        Text("Enable Finder Extension & Relaunch Finder")
                             .font(.title3.weight(.semibold))
                     }
 
-                    Text("macOS requires user permission before Finder can display third-party context menus.")
+                    Text("1. Click **Open Extensions Settings** and ensure **PeekMD Extension** is toggled ON under Finder Extensions.\n2. Click **Relaunch Finder** so macOS applies the extension to your active windows.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
-                    HStack(spacing: 16) {
+                    HStack(spacing: 12) {
                         Button(action: {
                             state.openSystemExtensionSettings()
                         }) {
@@ -47,9 +47,16 @@ public struct OnboardingView: View {
                         .buttonStyle(.borderedProminent)
 
                         Button(action: {
-                            state.checkExtensionStatus()
+                            state.restartFinder()
                         }) {
-                            Label("Check Status", systemImage: "arrow.clockwise")
+                            Label("Relaunch Finder", systemImage: "arrow.counterclockwise")
+                        }
+                        .buttonStyle(.bordered)
+
+                        Button(action: {
+                            state.registerAndFixExtensions()
+                        }) {
+                            Label("Repair Extension", systemImage: "wrench.and.screwdriver")
                         }
                         .buttonStyle(.bordered)
                     }
