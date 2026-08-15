@@ -1,6 +1,102 @@
 import SwiftUI
 import AppKit
 
+// MARK: - Custom Flipped ClipView
+public final class FlippedClipView: NSClipView {
+    public override var isFlipped: Bool { true }
+}
+
+// MARK: - Editor Container View (Gutter + ScrollView + TextView)
+public final class EditorContainerView: NSView {
+    public let gutterView: LineNumberGutterView
+    public let scrollView: NSScrollView
+    public let textView: CustomTextView
+
+    public init(font: NSFont, isEditable: Bool) {
+        let textStorage = NSTextStorage()
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+
+        let textContainer = NSTextContainer(containerSize: NSSize(width: 500, height: CGFloat.greatestFiniteMagnitude))
+        textContainer.widthTracksTextView = true
+        textContainer.heightTracksTextView = false
+        layoutManager.addTextContainer(textContainer)
+
+        self.textView = CustomTextView(frame: NSRect(x: 0, y: 0, width: 500, height: 400), textContainer: textContainer)
+        self.textView.minSize = NSSize(width: 0, height: 0)
+        self.textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        self.textView.isVerticallyResizable = true
+        self.textView.isHorizontallyResizable = false
+        self.textView.autoresizingMask = [.width]
+        self.textView.isRichText = false
+        self.textView.importsGraphics = false
+        self.textView.allowsUndo = true
+        self.textView.isEditable = isEditable
+        self.textView.isSelectable = true
+        self.textView.font = font
+        self.textView.textColor = NSColor.textColor
+        self.textView.backgroundColor = .clear
+        self.textView.drawsBackground = false
+        self.textView.textContainerInset = NSSize(width: 14, height: 14)
+
+        // Turn off smart substitution that can interfere with markdown syntax
+        self.textView.isAutomaticQuoteSubstitutionEnabled = false
+        self.textView.isAutomaticDashSubstitutionEnabled = false
+        self.textView.isAutomaticTextReplacementEnabled = false
+        self.textView.isAutomaticSpellingCorrectionEnabled = false
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 4
+        self.textView.defaultParagraphStyle = paragraphStyle
+        self.textView.typingAttributes = [
+            .font: font,
+            .foregroundColor: NSColor.textColor,
+            .paragraphStyle: paragraphStyle
+        ]
+
+        self.scrollView = NSScrollView(frame: .zero)
+        let clipView = FlippedClipView()
+        clipView.drawsBackground = false
+        self.scrollView.contentView = clipView
+        self.scrollView.drawsBackground = false
+        self.scrollView.borderType = .noBorder
+        self.scrollView.hasVerticalScroller = true
+        self.scrollView.hasHorizontalScroller = false
+        self.scrollView.autohidesScrollers = true
+        self.scrollView.documentView = self.textView
+
+        self.gutterView = LineNumberGutterView(textView: self.textView, scrollView: self.scrollView)
+
+        super.init(frame: NSRect(x: 0, y: 0, width: 600, height: 400))
+
+        self.addSubview(self.gutterView)
+        self.addSubview(self.scrollView)
+    }
+
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    public override var isFlipped: Bool { true }
+
+    public override func resizeSubviews(withOldSize oldSize: NSSize) {
+        super.resizeSubviews(withOldSize: oldSize)
+        layoutSubviews()
+    }
+
+    public override func layout() {
+        super.layout()
+        layoutSubviews()
+    }
+
+    private func layoutSubviews() {
+        let gutterWidth: CGFloat = 46
+        gutterView.frame = NSRect(x: 0, y: 0, width: gutterWidth, height: bounds.height)
+        scrollView.frame = NSRect(x: gutterWidth, y: 0, width: max(0, bounds.width - gutterWidth), height: bounds.height)
+    }
+}
+
+// MARK: - SwiftUI NSViewRepresentable Wrapper
 public struct SourceTextEditor: NSViewRepresentable {
     @Binding public var text: String
     public var font: NSFont
@@ -10,7 +106,7 @@ public struct SourceTextEditor: NSViewRepresentable {
 
     public init(
         text: Binding<String>,
-        font: NSFont = NSFont.monospacedSystemFont(ofSize: 14, weight: .regular),
+        font: NSFont = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular),
         isEditable: Bool = true,
         onTextChange: ((String) -> Void)? = nil,
         editorHelper: SourceEditorHelper? = nil
@@ -26,67 +122,21 @@ public struct SourceTextEditor: NSViewRepresentable {
         Coordinator(self)
     }
 
-    public func makeNSView(context: Context) -> NSScrollView {
-        let scrollView = NSScrollView()
-        scrollView.drawsBackground = false
-        scrollView.borderType = .noBorder
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false
-        scrollView.autohidesScrollers = true
+    public func makeNSView(context: Context) -> EditorContainerView {
+        let container = EditorContainerView(font: font, isEditable: isEditable)
+        container.textView.delegate = context.coordinator
+        container.textView.string = text
 
-        let contentSize = scrollView.contentSize
-        let textStorage = NSTextStorage()
-        let layoutManager = NSLayoutManager()
-        textStorage.addLayoutManager(layoutManager)
+        context.coordinator.containerView = container
+        context.coordinator.textView = container.textView
+        editorHelper?.textView = container.textView
 
-        let textContainer = NSTextContainer(containerSize: NSSize(width: contentSize.width, height: CGFloat.greatestFiniteMagnitude))
-        textContainer.widthTracksTextView = true
-        layoutManager.addTextContainer(textContainer)
-
-        let textView = CustomTextView(frame: NSRect(origin: .zero, size: contentSize), textContainer: textContainer)
-        textView.minSize = NSSize(width: 0, height: contentSize.height)
-        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false
-        textView.autoresizingMask = [.width]
-        textView.isEditable = isEditable
-        textView.isSelectable = true
-        textView.allowsUndo = true
-        textView.font = font
-        textView.textColor = NSColor.labelColor
-        textView.backgroundColor = .clear
-        textView.drawsBackground = false
-        textView.textContainerInset = NSSize(width: 16, height: 16)
-        textView.delegate = context.coordinator
-
-        // Line spacing and typography
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 4
-        textView.defaultParagraphStyle = paragraphStyle
-        textView.typingAttributes = [
-            .font: font,
-            .foregroundColor: NSColor.labelColor,
-            .paragraphStyle: paragraphStyle
-        ]
-
-        textView.string = text
-        scrollView.documentView = textView
-
-        // Setup ruler view for line numbers
-        let rulerView = LineNumberRulerView(textView: textView)
-        scrollView.verticalRulerView = rulerView
-        scrollView.hasHorizontalRuler = false
-        scrollView.hasVerticalRuler = true
-        scrollView.rulersVisible = true
-
-        context.coordinator.textView = textView
-        editorHelper?.textView = textView
-
-        return scrollView
+        return container
     }
 
-    public func updateNSView(_ nsView: NSScrollView, context: Context) {
-        guard let textView = nsView.documentView as? CustomTextView else { return }
+    public func updateNSView(_ nsView: EditorContainerView, context: Context) {
+        context.coordinator.parent = self
+        let textView = nsView.textView
 
         if textView.font != font {
             textView.font = font
@@ -95,7 +145,7 @@ public struct SourceTextEditor: NSViewRepresentable {
             textView.defaultParagraphStyle = paragraphStyle
             textView.typingAttributes = [
                 .font: font,
-                .foregroundColor: NSColor.labelColor,
+                .foregroundColor: NSColor.textColor,
                 .paragraphStyle: paragraphStyle
             ]
         }
@@ -110,7 +160,7 @@ public struct SourceTextEditor: NSViewRepresentable {
             if selectedRange.location + selectedRange.length <= text.count {
                 textView.setSelectedRange(selectedRange)
             }
-            nsView.verticalRulerView?.needsDisplay = true
+            nsView.gutterView.needsDisplay = true
         }
 
         editorHelper?.textView = textView
@@ -118,6 +168,7 @@ public struct SourceTextEditor: NSViewRepresentable {
 
     public class Coordinator: NSObject, NSTextViewDelegate {
         var parent: SourceTextEditor
+        weak var containerView: EditorContainerView?
         weak var textView: CustomTextView?
         var isUpdatingFromTextView = false
 
@@ -133,16 +184,14 @@ public struct SourceTextEditor: NSViewRepresentable {
             parent.onTextChange?(newText)
             isUpdatingFromTextView = false
 
-            if let scrollView = tv.enclosingScrollView, let ruler = scrollView.verticalRulerView {
-                ruler.needsDisplay = true
-            }
+            containerView?.gutterView.needsDisplay = true
         }
     }
 }
 
+// MARK: - Custom TextView with Markdown Shortcuts & Smart Indentation
 public final class CustomTextView: NSTextView {
     public override func insertNewline(_ sender: Any?) {
-        // Smart list continuation
         let text = self.string as NSString
         let selectedRange = self.selectedRange()
         let lineRange = text.lineRange(for: NSRange(location: selectedRange.location, length: 0))
@@ -151,7 +200,6 @@ public final class CustomTextView: NSTextView {
         // Check for Markdown list prefixes
         let trimmed = currentLine.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed == "-" || trimmed == "*" || trimmed == "+" || trimmed == "- [ ]" || trimmed == "- [x]" {
-            // If empty list item, hitting return clears the bullet
             let replaceRange = NSRange(location: lineRange.location, length: lineRange.length)
             if shouldChangeText(in: replaceRange, replacementString: "\n") {
                 replaceCharacters(in: replaceRange, with: "\n")
@@ -184,14 +232,127 @@ public final class CustomTextView: NSTextView {
     }
 
     public override func insertTab(_ sender: Any?) {
-        // Insert 2 spaces instead of hard tab
         self.insertText("  ", replacementRange: self.selectedRange())
+    }
+}
+
+// MARK: - Line Number Gutter View
+public final class LineNumberGutterView: NSView {
+    private weak var textView: NSTextView?
+    private weak var scrollView: NSScrollView?
+
+    public init(textView: NSTextView, scrollView: NSScrollView) {
+        self.textView = textView
+        self.scrollView = scrollView
+        super.init(frame: .zero)
+        self.postsFrameChangedNotifications = true
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(viewDidScroll(_:)),
+            name: NSView.boundsDidChangeNotification,
+            object: scrollView.contentView
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textDidChange(_:)),
+            name: NSText.didChangeNotification,
+            object: textView
+        )
+    }
+
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func viewDidScroll(_ notification: Notification) {
+        self.needsDisplay = true
+    }
+
+    @objc private func textDidChange(_ notification: Notification) {
+        self.needsDisplay = true
+    }
+
+    public override var isFlipped: Bool { true }
+
+    public override func draw(_ dirtyRect: NSRect) {
+        let isDark = effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+        let bgColor = isDark ? NSColor(white: 0.12, alpha: 1.0) : NSColor(white: 0.96, alpha: 1.0)
+        let textColor = isDark ? NSColor(white: 0.45, alpha: 1.0) : NSColor(white: 0.55, alpha: 1.0)
+        let dividerColor = isDark ? NSColor(white: 0.22, alpha: 1.0) : NSColor(white: 0.88, alpha: 1.0)
+
+        bgColor.setFill()
+        dirtyRect.fill()
+
+        let sepRect = NSRect(x: bounds.width - 0.5, y: dirtyRect.origin.y, width: 0.5, height: dirtyRect.height)
+        dividerColor.setFill()
+        sepRect.fill()
+
+        guard let tv = textView,
+              let lm = tv.layoutManager,
+              let tc = tv.textContainer,
+              let sv = scrollView else { return }
+
+        let visibleRect = sv.contentView.bounds
+        let glyphRange = lm.glyphRange(forBoundingRect: visibleRect, in: tc)
+        let str = tv.string as NSString
+
+        let font = NSFont.monospacedDigitSystemFont(ofSize: 11, weight: .regular)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: textColor
+        ]
+
+        if str.length == 0 {
+            let lineStr = "1" as NSString
+            let size = lineStr.size(withAttributes: attributes)
+            let yPos = tv.textContainerInset.height - visibleRect.origin.y
+            lineStr.draw(at: NSPoint(x: bounds.width - size.width - 10, y: yPos), withAttributes: attributes)
+            return
+        }
+
+        var lineNumber = 1
+        var idx = 0
+
+        while idx < glyphRange.location && idx < str.length {
+            let lineRange = str.lineRange(for: NSRange(location: idx, length: 0))
+            lineNumber += 1
+            idx = NSMaxRange(lineRange)
+        }
+
+        idx = glyphRange.location
+        while idx < NSMaxRange(glyphRange) && idx < str.length {
+            let charIdx = lm.characterIndexForGlyph(at: idx)
+            let lineRange = str.lineRange(for: NSRange(location: charIdx, length: 0))
+            let lineGlyphRange = lm.glyphRange(forCharacterRange: lineRange, actualCharacterRange: nil)
+
+            var lineRect = lm.lineFragmentRect(forGlyphAt: lineGlyphRange.location, effectiveRange: nil)
+            lineRect.origin.y += tv.textContainerInset.height
+
+            let yPos = lineRect.origin.y - visibleRect.origin.y
+            let lineStr = "\(lineNumber)" as NSString
+            let size = lineStr.size(withAttributes: attributes)
+            let drawPoint = NSPoint(x: bounds.width - size.width - 10, y: yPos + (lineRect.height - size.height) / 2)
+
+            if drawPoint.y >= -20 && drawPoint.y <= bounds.height + 20 {
+                lineStr.draw(at: drawPoint, withAttributes: attributes)
+            }
+
+            lineNumber += 1
+            let nextIdx = NSMaxRange(lineGlyphRange)
+            if nextIdx <= idx { break }
+            idx = nextIdx
+        }
     }
 }
 
 // MARK: - Editor Helper for Toolbar Actions
 public final class SourceEditorHelper: ObservableObject {
-    public weak var textView: CustomTextView?
+    public weak var textView: NSTextView?
 
     public init() {}
 
@@ -268,85 +429,5 @@ public final class SourceEditorHelper: ObservableObject {
 
 """
         insertBlock(blockContent: callout)
-    }
-}
-
-// MARK: - Line Number Ruler View
-public final class LineNumberRulerView: NSRulerView {
-    private weak var customTextView: CustomTextView?
-
-    public init(textView: CustomTextView) {
-        self.customTextView = textView
-        super.init(scrollView: textView.enclosingScrollView, orientation: .verticalRuler)
-        self.clientView = textView
-        self.ruleThickness = 36
-    }
-
-    public required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    public override func drawHashMarksAndLabels(in rect: NSRect) {
-        guard let textView = customTextView,
-              let layoutManager = textView.layoutManager,
-              let textContainer = textView.textContainer else {
-            return
-        }
-
-        // Draw ruler background
-        let isDark = textView.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-        let bgColor = isDark ? NSColor(white: 0.12, alpha: 1.0) : NSColor(white: 0.96, alpha: 1.0)
-        let textColor = isDark ? NSColor(white: 0.45, alpha: 1.0) : NSColor(white: 0.60, alpha: 1.0)
-        let dividerColor = isDark ? NSColor(white: 0.2, alpha: 1.0) : NSColor(white: 0.88, alpha: 1.0)
-
-        bgColor.setFill()
-        rect.fill()
-
-        // Draw separator border line
-        let separatorRect = NSRect(x: bounds.width - 0.5, y: rect.origin.y, width: 0.5, height: rect.height)
-        dividerColor.setFill()
-        separatorRect.fill()
-
-        let visibleRect = scrollView?.contentView.bounds ?? textView.visibleRect
-        let visibleGlyphRange = layoutManager.glyphRange(forBoundingRect: visibleRect, in: textContainer)
-        let text = textView.string as NSString
-
-        let font = NSFont.monospacedDigitSystemFont(ofSize: 10, weight: .regular)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .foregroundColor: textColor
-        ]
-
-        var lineNumber = 1
-        var index = 0
-
-        // Calculate starting line number
-        while index < visibleGlyphRange.location && index < text.length {
-            let lineRange = text.lineRange(for: NSRange(location: index, length: 0))
-            lineNumber += 1
-            index = NSMaxRange(lineRange)
-        }
-
-        index = visibleGlyphRange.location
-        while index <= NSMaxRange(visibleGlyphRange) && index <= text.length {
-            let charIndex = layoutManager.characterIndexForGlyph(at: min(index, layoutManager.numberOfGlyphs > 0 ? layoutManager.numberOfGlyphs - 1 : 0))
-            let lineRange = text.lineRange(for: NSRange(location: charIndex, length: 0))
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: lineRange, actualCharacterRange: nil)
-
-            var lineRect = layoutManager.lineFragmentRect(forGlyphAt: glyphRange.location, effectiveRange: nil)
-            lineRect.origin.y += textView.textContainerInset.height
-
-            let yPos = lineRect.origin.y - visibleRect.origin.y
-            let lineStr = "\(lineNumber)" as NSString
-            let stringSize = lineStr.size(withAttributes: attributes)
-            let drawPoint = NSPoint(x: bounds.width - stringSize.width - 6, y: yPos + (lineRect.height - stringSize.height) / 2)
-
-            lineStr.draw(at: drawPoint, withAttributes: attributes)
-
-            lineNumber += 1
-            let nextIndex = NSMaxRange(glyphRange)
-            if nextIndex <= index { break }
-            index = nextIndex
-        }
     }
 }

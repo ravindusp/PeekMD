@@ -100,6 +100,13 @@ public struct MarkdownEditorView: View {
         .sheet(isPresented: $isShowingSettingsSheet) {
             SettingsSheetView(isPresented: $isShowingSettingsSheet)
         }
+        .background(
+            Group {
+                Button("") { viewMode = .edit }.keyboardShortcut("e", modifiers: .command).hidden()
+                Button("") { viewMode = .split }.keyboardShortcut("d", modifiers: .command).hidden()
+                Button("") { viewMode = .preview }.keyboardShortcut("r", modifiers: .command).hidden()
+            }
+        )
         .onAppear {
             if let savedTheme = Theme(rawValue: SharedPreferences.shared.selectedTheme) {
                 selectedTheme = savedTheme
@@ -122,6 +129,7 @@ public struct MarkdownEditorView: View {
                     isEditable: true,
                     editorHelper: editorHelper
                 )
+                .background(Color(NSColor.textBackgroundColor))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
 
@@ -137,9 +145,10 @@ public struct MarkdownEditorView: View {
                         isEditable: true,
                         editorHelper: editorHelper
                     )
+                    .background(Color(NSColor.textBackgroundColor))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(minWidth: 300)
+                .frame(minWidth: 320)
 
                 MarkdownWebView(
                     markdown: document.text,
@@ -153,7 +162,7 @@ public struct MarkdownEditorView: View {
                         enableWikilinks: true
                     )
                 )
-                .frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                .frame(minWidth: 320, maxWidth: .infinity, maxHeight: .infinity)
             }
 
         case .preview:
