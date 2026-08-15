@@ -26,16 +26,19 @@
 		72F521B91BB7E5F8BD5557E2 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70282613E355AD139231F084 /* PreviewProvider.swift */; };
 		7F079439AB31060F6A32E8CF /* StatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB2282D59CC396F11527EE /* StatusBadgeView.swift */; };
 		85C6A4EB754058FF79974919 /* FilenameResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32AC0D54BE2E364D10134B32 /* FilenameResolver.swift */; };
+		8AAA93B9CCD6443F2BE0FD39 /* MarkdownDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CEB3B0AD54705806826849 /* MarkdownDocument.swift */; };
 		9A799015077B7D06AAD5546A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87008F0AF6577D793FEBA44 /* AppState.swift */; };
 		9D21EB10BE767A2BE3D756B4 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D3A55426E84D1A4730D8CA /* SharedPreferences.swift */; };
 		A2AF17448C91A2387D4E9D2A /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9323A38D72F7E68D3AA21D59 /* SharedConstants.swift */; };
 		AE695D5BDF4890BF553B2AE6 /* MarkdownFileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5031FC42CF7FA5F0B6475FF1 /* MarkdownFileCreator.swift */; };
 		B4F3AD0B60032B9DE0BF1B95 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7295EEE5B42DF98007505 /* SettingsView.swift */; };
+		CC918BE07792B3B4C74B0628 /* MarkdownEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23E0DB81E5C0E4C3C7EB24B /* MarkdownEditorView.swift */; };
 		D2F56495B69F51B50DE510F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94FA44ADB126B7027BF1F0C /* Assets.xcassets */; };
 		DBEC128622D525A7B2294E80 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9323A38D72F7E68D3AA21D59 /* SharedConstants.swift */; };
 		E580F63DD69C66899012384A /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D3A55426E84D1A4730D8CA /* SharedPreferences.swift */; };
 		E785BC543EBC3091FB83BE49 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B83936EF4089182C3AC20 /* LocationsView.swift */; };
 		EAFEF4CF7F6B0776BF4A81F2 /* DocumentViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9C80269948AD212ED7B0B7 /* DocumentViewerView.swift */; };
+		F9439F597EFCAD1E2ECDCAFB /* SourceTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E23D8F283D724129397EA2D /* SourceTextEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,7 @@
 		32AC0D54BE2E364D10134B32 /* FilenameResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilenameResolver.swift; sourceTree = "<group>"; };
 		42A1F1069F7E1D3DE8575817 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		5031FC42CF7FA5F0B6475FF1 /* MarkdownFileCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileCreator.swift; sourceTree = "<group>"; };
+		5E23D8F283D724129397EA2D /* SourceTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTextEditor.swift; sourceTree = "<group>"; };
 		648A0C8E5651E8BC2C36A4D3 /* MarkdownFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70282613E355AD139231F084 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		78549D07E6C701A296525AC6 /* MarkdownQuickLookExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkdownQuickLookExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,10 +89,12 @@
 		90B7295EEE5B42DF98007505 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9323A38D72F7E68D3AA21D59 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
 		93D3A55426E84D1A4730D8CA /* SharedPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferences.swift; sourceTree = "<group>"; };
+		A23E0DB81E5C0E4C3C7EB24B /* MarkdownEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEditorView.swift; sourceTree = "<group>"; };
 		A5109D7901E468F54D6C291C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A599F6851A30556A5703338D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A87008F0AF6577D793FEBA44 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		A8B93B492447BA7AB95F3708 /* MarkdownQuickLookExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownQuickLookExtension.entitlements; sourceTree = "<group>"; };
+		A9CEB3B0AD54705806826849 /* MarkdownDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownDocument.swift; sourceTree = "<group>"; };
 		C43BCBC4D61A55390D4DE1CA /* MarkdownFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkdownFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6519FE8B638569E1DD718E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CB6B83936EF4089182C3AC20 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				FF5EB840685F70BD4ACC79EE /* ContentView.swift */,
 				7B9C80269948AD212ED7B0B7 /* DocumentViewerView.swift */,
 				CB6B83936EF4089182C3AC20 /* LocationsView.swift */,
+				A23E0DB81E5C0E4C3C7EB24B /* MarkdownEditorView.swift */,
 				EB948B28AC3EA5D6AD7A1E2A /* OnboardingView.swift */,
 				90B7295EEE5B42DF98007505 /* SettingsView.swift */,
 				8BBD18E649E9216CBD848C7C /* Components */,
@@ -173,6 +180,7 @@
 				A87008F0AF6577D793FEBA44 /* AppState.swift */,
 				E94FA44ADB126B7027BF1F0C /* Assets.xcassets */,
 				A599F6851A30556A5703338D /* Info.plist */,
+				A9CEB3B0AD54705806826849 /* MarkdownDocument.swift */,
 				F1F1A433B75AC453CEB618D9 /* MarkdownFinderApp.entitlements */,
 				0C89CDD80CC6BD5808AD592C /* MarkdownFinderApp.swift */,
 				3759690101FDB7F8696C6A8B /* Views */,
@@ -203,6 +211,7 @@
 		8BBD18E649E9216CBD848C7C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5E23D8F283D724129397EA2D /* SourceTextEditor.swift */,
 				89BB2282D59CC396F11527EE /* StatusBadgeView.swift */,
 				FD22FAE409885DD04308F973 /* WebView.swift */,
 			);
@@ -289,12 +298,15 @@
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					0EA4D0EE0CBAAC119BBE42FE = {
+						DevelopmentTeam = 7PMBK2ZW83;
 						ProvisioningStyle = Automatic;
 					};
 					1EBC90C3B1FA668B7F40BC16 = {
+						DevelopmentTeam = 7PMBK2ZW83;
 						ProvisioningStyle = Automatic;
 					};
 					44A5C8D66E638FA5F83BD9F3 = {
+						DevelopmentTeam = 7PMBK2ZW83;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -369,12 +381,15 @@
 				1BDD8C677A1EBC7197CCD5B2 /* FilenameResolver.swift in Sources */,
 				501B08D623E03AC06746D864 /* LocationManager.swift in Sources */,
 				E785BC543EBC3091FB83BE49 /* LocationsView.swift in Sources */,
+				8AAA93B9CCD6443F2BE0FD39 /* MarkdownDocument.swift in Sources */,
+				CC918BE07792B3B4C74B0628 /* MarkdownEditorView.swift in Sources */,
 				0FDF3FE37D929D3B388AE7FC /* MarkdownFileCreator.swift in Sources */,
 				270F11FDA5D7CEC1DFD7CE82 /* MarkdownFinderApp.swift in Sources */,
 				683EC70168C1B362BDAF9C72 /* OnboardingView.swift in Sources */,
 				B4F3AD0B60032B9DE0BF1B95 /* SettingsView.swift in Sources */,
 				DBEC128622D525A7B2294E80 /* SharedConstants.swift in Sources */,
 				454E585D805DEC83E25BEF76 /* SharedPreferences.swift in Sources */,
+				F9439F597EFCAD1E2ECDCAFB /* SourceTextEditor.swift in Sources */,
 				7F079439AB31060F6A32E8CF /* StatusBadgeView.swift in Sources */,
 				3B0692F91F8144137C64EB3C /* WebView.swift in Sources */,
 			);
@@ -403,7 +418,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownFinderApp/MarkdownFinderApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownFinderApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -422,7 +436,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownQuickLookExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -442,7 +455,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownFinderExtension/MarkdownFinderExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownFinderExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,7 +474,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownFinderExtension/MarkdownFinderExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownFinderExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -482,7 +493,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownQuickLookExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -503,7 +513,6 @@
 				CODE_SIGN_ENTITLEMENTS = MarkdownFinderApp/MarkdownFinderApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = MarkdownFinderApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -552,6 +561,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -609,6 +619,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7PMBK2ZW83;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

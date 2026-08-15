@@ -36,10 +36,13 @@
         <string>PreviewProvider</string>
         <key>NSExtensionAttributes</key>
         <dict>
+            <key>QLIsDataBasedPreview</key>
+            <true/>
             <key>QLSupportedContentTypes</key>
             <array>
                 <string>net.daringfireball.markdown</string>
                 <string>public.markdown</string>
+                <string>public.plain-text</string>
                 <string>public.utf8-plain-text</string>
                 <string>dyn.age80w45g</string>
                 <string>dyn.age80w55g</string>

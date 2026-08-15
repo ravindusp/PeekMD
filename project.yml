@@ -13,6 +13,7 @@ settings:
     SWIFT_VERSION: "5.9"
     MACOSX_DEPLOYMENT_TARGET: "13.0"
     CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 7PMBK2ZW83
 
 packages:
   MarkdownRenderer:
