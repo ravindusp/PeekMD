@@ -32,15 +32,18 @@
             <key>CFBundleTypeName</key>
             <string>Markdown Document</string>
             <key>CFBundleTypeRole</key>
-            <string>Viewer</string>
+            <string>Editor</string>
             <key>LSHandlerRank</key>
-            <string>Alternate</string>
+            <string>Default</string>
             <key>LSItemContentTypes</key>
             <array>
                 <string>net.daringfireball.markdown</string>
                 <string>public.markdown</string>
                 <string>public.utf8-plain-text</string>
+                <string>public.plain-text</string>
             </array>
+            <key>NSDocumentClass</key>
+            <string>NSDocument</string>
         </dict>
     </array>
     <key>UTImportedTypeDeclarations</key>

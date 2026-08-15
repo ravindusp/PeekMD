@@ -103,14 +103,17 @@ swiftc -O \
     "$PROJECT_DIR/Shared/SharedPreferences.swift" \
     "$PROJECT_DIR/Shared/LocationManager.swift" \
     "$PROJECT_DIR/Shared/MarkdownFileCreator.swift" \
+    "$PROJECT_DIR/MarkdownFinderApp/MarkdownDocument.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/AppState.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/Components/WebView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/Components/StatusBadgeView.swift" \
+    "$PROJECT_DIR/MarkdownFinderApp/Views/Components/SourceTextEditor.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/SettingsView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/LocationsView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/OnboardingView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/DocumentViewerView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/ContentView.swift" \
+    "$PROJECT_DIR/MarkdownFinderApp/Views/MarkdownEditorView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.swift" \
     -o "$APP_DIR/Contents/MacOS/MarkdownFinder"
 

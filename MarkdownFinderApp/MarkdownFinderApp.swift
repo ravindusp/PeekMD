@@ -6,29 +6,41 @@ struct MarkdownFinderApp: App {
     @StateObject private var appState = AppState.shared
 
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        DocumentGroup(newDocument: MarkdownDocument()) { file in
+            MarkdownEditorView(document: file.$document, fileURL: file.fileURL)
                 .environmentObject(appState)
-                .onOpenURL { url in
-                    appState.openDocument(from: url)
-                }
         }
-        .windowStyle(.titleBar)
         .windowToolbarStyle(.unified)
         .commands {
             SidebarCommands()
-            CommandGroup(replacing: .newItem) {
-                Button("Open Markdown File...") {
-                    let panel = NSOpenPanel()
-                    panel.canChooseFiles = true
-                    panel.canChooseDirectories = false
-                    panel.allowedContentTypes = [.init(filenameExtension: "md")!, .init(filenameExtension: "markdown")!, .plainText]
-                    if panel.runModal() == .OK, let url = panel.url {
-                        appState.openDocument(from: url)
-                    }
+
+            CommandGroup(replacing: .appSettings) {
+                Button("Settings...") {
+                    openSettingsWindow()
                 }
-                .keyboardShortcut("o", modifiers: .command)
+                .keyboardShortcut(",", modifiers: .command)
+            }
+
+            CommandGroup(after: .newItem) {
+                Button("Preferences & Extension Setup...") {
+                    openSettingsWindow()
+                }
             }
         }
+
+        Settings {
+            ContentView()
+                .environmentObject(appState)
+        }
+    }
+
+    private func openSettingsWindow() {
+        if #available(macOS 14.0, *) {
+            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        } else {
+            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        }
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
