@@ -4,6 +4,7 @@ import QuickLookUI
 import UniformTypeIdentifiers
 import MarkdownRenderer
 
+@objc(PreviewProvider)
 final class PreviewProvider: QLPreviewProvider, QLPreviewingController {
     private let preferences = SharedPreferences.shared
 

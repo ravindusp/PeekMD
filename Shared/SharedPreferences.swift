@@ -133,16 +133,32 @@ public final class SharedPreferences: @unchecked Sendable {
         }
     }
 
+    /// Resolves real user home path outside sandbox container
+    public static func realUserHomeDirectory() -> URL {
+        if let pw = getpwuid(getuid()), let dir = pw.pointee.pw_dir {
+            return URL(fileURLWithPath: String(cString: dir), isDirectory: true)
+        }
+        return FileManager.default.homeDirectoryForCurrentUser
+    }
+
     /// Computes the active set of directory URLs that Finder Sync should monitor.
     public func resolvedMonitoredURLs() -> Set<URL> {
         var urls = Set<URL>()
 
+        // 1. Root and Real Home
+        urls.insert(URL(fileURLWithPath: "/", isDirectory: true))
+        let realHome = SharedPreferences.realUserHomeDirectory()
+        urls.insert(realHome)
+
         if monitorHomeDirectory {
-            urls.insert(FileManager.default.homeDirectoryForCurrentUser)
+            urls.insert(realHome.appendingPathComponent("Desktop", isDirectory: true))
+            urls.insert(realHome.appendingPathComponent("Documents", isDirectory: true))
+            urls.insert(realHome.appendingPathComponent("Downloads", isDirectory: true))
         }
 
         if monitorExternalVolumes {
             let volumesURL = URL(fileURLWithPath: "/Volumes", isDirectory: true)
+            urls.insert(volumesURL)
             if let volumeContents = try? FileManager.default.contentsOfDirectory(
                 at: volumesURL,
                 includingPropertiesForKeys: [.isVolumeKey],

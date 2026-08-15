@@ -27,7 +27,7 @@
         <key>NSExtensionPointIdentifier</key>
         <string>com.apple.quicklook.preview</string>
         <key>NSExtensionPrincipalClass</key>
-        <string>MarkdownQuickLookExtension.PreviewProvider</string>
+        <string>PreviewProvider</string>
         <key>NSExtensionAttributes</key>
         <dict>
             <key>QLSupportedContentTypes</key>

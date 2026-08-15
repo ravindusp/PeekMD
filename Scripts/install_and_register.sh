@@ -15,6 +15,11 @@ echo "--> Installing to $DEST_APP..."
 rm -rf "$DEST_APP"
 cp -R "$APP_SRC" "$DEST_APP"
 
+echo "--> Registering with LaunchServices (lsregister)..."
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$DEST_APP" || true
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$DEST_APP/Contents/PlugIns/MarkdownFinderExtension.appex" || true
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$DEST_APP/Contents/PlugIns/MarkdownQuickLookExtension.appex" || true
+
 echo "--> Registering Finder Sync Extension with pluginkit..."
 pluginkit -a "$DEST_APP/Contents/PlugIns/MarkdownFinderExtension.appex" || true
 pluginkit -e use -i com.oneloop.MarkdownFinder.FinderSync || true
@@ -31,4 +36,3 @@ echo "--> Restarting Finder..."
 killall Finder 2>/dev/null || true
 
 echo "✅ Installation & Registration Complete!"
-echo "You can now launch $DEST_APP or right-click inside Finder folders."
