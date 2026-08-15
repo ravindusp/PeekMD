@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01A00010 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00001 /* SharedConstants.swift */; };
+		01A00011 /* FilenameResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00002 /* FilenameResolver.swift */; };
+		01A00012 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00003 /* SharedPreferences.swift */; };
+		01A00013 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00004 /* LocationManager.swift */; };
+		01A00014 /* MarkdownFileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00005 /* MarkdownFileCreator.swift */; };
+		01A00015 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00006 /* AppState.swift */; };
+		01A00016 /* MarkdownFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00007 /* MarkdownFinderApp.swift */; };
+		01A00017 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00008 /* ContentView.swift */; };
+		01A00018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00009 /* SettingsView.swift */; };
+		01A00019 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0000A /* LocationsView.swift */; };
+		01A0001A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0000B /* OnboardingView.swift */; };
+		01A0001B /* DocumentViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0000C /* DocumentViewerView.swift */; };
+		01A0001C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0000D /* WebView.swift */; };
+		01A0001D /* StatusBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0000E /* StatusBadgeView.swift */; };
+		01A0001E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01A0000F /* Assets.xcassets */; };
+		01A00030 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00020 /* FinderSync.swift */; };
+		01A00031 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00001 /* SharedConstants.swift */; };
+		01A00032 /* FilenameResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00002 /* FilenameResolver.swift */; };
+		01A00033 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00003 /* SharedPreferences.swift */; };
+		01A00034 /* MarkdownFileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00005 /* MarkdownFileCreator.swift */; };
+		01A00040 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00021 /* PreviewProvider.swift */; };
+		01A00041 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00001 /* SharedConstants.swift */; };
+		01A00042 /* FilenameResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00002 /* FilenameResolver.swift */; };
+		01A00043 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A00003 /* SharedPreferences.swift */; };
+		01A00050 /* MarkdownFinderExtension.appex in PlugIns */ = {isa = PBXBuildFile; fileRef = 01A00022 /* MarkdownFinderExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		01A00051 /* MarkdownQuickLookExtension.appex in PlugIns */ = {isa = PBXBuildFile; fileRef = 01A00023 /* MarkdownQuickLookExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01A00060 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A00000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01A00070;
+			remoteInfo = MarkdownFinderExtension;
+		};
+		01A00061 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01A00000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01A00071;
+			remoteInfo = MarkdownQuickLookExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01A00080 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				01A00050 /* MarkdownFinderExtension.appex in PlugIns */,
+				01A00051 /* MarkdownQuickLookExtension.appex in PlugIns */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		01A00001 /* SharedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedConstants.swift; sourceTree = "<group>"; };
+		01A00002 /* FilenameResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilenameResolver.swift; sourceTree = "<group>"; };
+		01A00003 /* SharedPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferences.swift; sourceTree = "<group>"; };
+		01A00004 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		01A00005 /* MarkdownFileCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFileCreator.swift; sourceTree = "<group>"; };
+		01A00006 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		01A00007 /* MarkdownFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFinderApp.swift; sourceTree = "<group>"; };
+		01A00008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		01A00009 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		01A0000A /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
+		01A0000B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		01A0000C /* DocumentViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewerView.swift; sourceTree = "<group>"; };
+		01A0000D /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		01A0000E /* StatusBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadgeView.swift; sourceTree = "<group>"; };
+		01A0000F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01A00020 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		01A00021 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		01A00022 /* MarkdownFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkdownFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		01A00023 /* MarkdownQuickLookExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkdownQuickLookExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		01A00024 /* MarkdownFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkdownFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01A00090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01A00091 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01A00092 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01A000A0 = {
+			isa = PBXGroup;
+			children = (
+				01A000A1 /* MarkdownFinderApp */,
+				01A000A2 /* MarkdownFinderExtension */,
+				01A000A3 /* MarkdownQuickLookExtension */,
+				01A000A4 /* Shared */,
+				01A000A5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01A000A1 /* MarkdownFinderApp */ = {
+			isa = PBXGroup;
+			children = (
+				01A00007 /* MarkdownFinderApp.swift */,
+				01A00006 /* AppState.swift */,
+				01A000A6 /* Views */,
+				01A0000F /* Assets.xcassets */,
+			);
+			path = MarkdownFinderApp;
+			sourceTree = "<group>";
+		};
+		01A000A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01A00008 /* ContentView.swift */,
+				01A00009 /* SettingsView.swift */,
+				01A0000A /* LocationsView.swift */,
+				01A0000B /* OnboardingView.swift */,
+				01A0000C /* DocumentViewerView.swift */,
+				01A0000D /* WebView.swift */,
+				01A0000E /* StatusBadgeView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		01A000A2 /* MarkdownFinderExtension */ = {
+			isa = PBXGroup;
+			children = (
+				01A00020 /* FinderSync.swift */,
+			);
+			path = MarkdownFinderExtension;
+			sourceTree = "<group>";
+		};
+		01A000A3 /* MarkdownQuickLookExtension */ = {
+			isa = PBXGroup;
+			children = (
+				01A00021 /* PreviewProvider.swift */,
+			);
+			path = MarkdownQuickLookExtension;
+			sourceTree = "<group>";
+		};
+		01A000A4 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				01A00001 /* SharedConstants.swift */,
+				01A00002 /* FilenameResolver.swift */,
+				01A00003 /* SharedPreferences.swift */,
+				01A00004 /* LocationManager.swift */,
+				01A00005 /* MarkdownFileCreator.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		01A000A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01A00024 /* MarkdownFinder.app */,
+				01A00022 /* MarkdownFinderExtension.appex */,
+				01A00023 /* MarkdownQuickLookExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01A000B0 /* MarkdownFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01A000C0 /* Build configuration list for PBXNativeTarget "MarkdownFinder" */;
+			buildPhases = (
+				01A000D0 /* Sources */,
+				01A00090 /* Frameworks */,
+				01A000E0 /* Resources */,
+				01A00080 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01A000F0 /* PBXTargetDependency */,
+				01A000F1 /* PBXTargetDependency */,
+			);
+			name = MarkdownFinder;
+			productName = MarkdownFinder;
+			productReference = 01A00024 /* MarkdownFinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01A00070 /* MarkdownFinderExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01A000C1 /* Build configuration list for PBXNativeTarget "MarkdownFinderExtension" */;
+			buildPhases = (
+				01A000D1 /* Sources */,
+				01A00091 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarkdownFinderExtension;
+			productName = MarkdownFinderExtension;
+			productReference = 01A00022 /* MarkdownFinderExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		01A00071 /* MarkdownQuickLookExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01A000C2 /* Build configuration list for PBXNativeTarget "MarkdownQuickLookExtension" */;
+			buildPhases = (
+				01A000D2 /* Sources */,
+				01A00092 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarkdownQuickLookExtension;
+			productName = MarkdownQuickLookExtension;
+			productReference = 01A00023 /* MarkdownQuickLookExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01A00000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 01A000C3 /* Build configuration list for PBXProject "MarkdownFinder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01A000A0;
+			productRefGroup = 01A000A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01A000B0 /* MarkdownFinder */,
+				01A00070 /* MarkdownFinderExtension */,
+				01A00071 /* MarkdownQuickLookExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01A000E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A0001E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01A000D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A00010 /* SharedConstants.swift in Sources */,
+				01A00011 /* FilenameResolver.swift in Sources */,
+				01A00012 /* SharedPreferences.swift in Sources */,
+				01A00013 /* LocationManager.swift in Sources */,
+				01A00014 /* MarkdownFileCreator.swift in Sources */,
+				01A00015 /* AppState.swift in Sources */,
+				01A00016 /* MarkdownFinderApp.swift in Sources */,
+				01A00017 /* ContentView.swift in Sources */,
+				01A00018 /* SettingsView.swift in Sources */,
+				01A00019 /* LocationsView.swift in Sources */,
+				01A0001A /* OnboardingView.swift in Sources */,
+				01A0001B /* DocumentViewerView.swift in Sources */,
+				01A0001C /* WebView.swift in Sources */,
+				01A0001D /* StatusBadgeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01A000D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A00030 /* FinderSync.swift in Sources */,
+				01A00031 /* SharedConstants.swift in Sources */,
+				01A00032 /* FilenameResolver.swift in Sources */,
+				01A00033 /* SharedPreferences.swift in Sources */,
+				01A00034 /* MarkdownFileCreator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01A000D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01A00040 /* PreviewProvider.swift in Sources */,
+				01A00041 /* SharedConstants.swift in Sources */,
+				01A00042 /* FilenameResolver.swift in Sources */,
+				01A00043 /* SharedPreferences.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01A000F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01A00070 /* MarkdownFinderExtension */;
+			targetProxy = 01A00060 /* PBXContainerItemProxy */;
+		};
+		01A000F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01A00071 /* MarkdownQuickLookExtension */;
+			targetProxy = 01A00061 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		01A00100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		01A00101 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		01A00110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownFinderApp/MarkdownFinderApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownFinderApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		01A00111 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownFinderApp/MarkdownFinderApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownFinderApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		01A00120 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownFinderExtension/MarkdownFinderExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownFinderExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder.FinderSync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		01A00121 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownFinderExtension/MarkdownFinderExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownFinderExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder.FinderSync;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		01A00130 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownQuickLookExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder.QuickLook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		01A00131 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownQuickLookExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.oneloop.MarkdownFinder.QuickLook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01A000C0 /* Build configuration list for PBXNativeTarget "MarkdownFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01A00110 /* Debug */,
+				01A00111 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01A000C1 /* Build configuration list for PBXNativeTarget "MarkdownFinderExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01A00120 /* Debug */,
+				01A00121 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01A000C2 /* Build configuration list for PBXNativeTarget "MarkdownQuickLookExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01A00130 /* Debug */,
+				01A00131 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01A000C3 /* Build configuration list for PBXProject "MarkdownFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01A00100 /* Debug */,
+				01A00101 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 01A00000 /* Project object */;
+}
