@@ -30,6 +30,8 @@ private enum ThemeStyles {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+        width: 100%;
     }
 
     body {
@@ -43,7 +45,16 @@ private enum ThemeStyles {
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
         color: var(--text-color);
         background-color: var(--bg-color);
+        overflow-wrap: break-word;
+        word-break: break-word;
+        overflow-x: hidden;
         transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .markdown-body {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -53,6 +64,7 @@ private enum ThemeStyles {
         line-height: 1.25;
         color: var(--heading-color);
         letter-spacing: -0.015em;
+        overflow-wrap: break-word;
     }
 
     h1 { font-size: 2.1em; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.3em; margin-top: 0.8em; }
@@ -65,6 +77,7 @@ private enum ThemeStyles {
     p {
         margin-top: 0;
         margin-bottom: 1.1em;
+        overflow-wrap: break-word;
     }
 
     a {
@@ -72,6 +85,8 @@ private enum ThemeStyles {
         text-decoration: none;
         border-bottom: 1px solid transparent;
         transition: border-color 0.15s ease;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
     a:hover {
@@ -81,6 +96,33 @@ private enum ThemeStyles {
     strong { font-weight: 600; color: var(--heading-color); }
     em { font-style: italic; }
     del { opacity: 0.65; text-decoration: line-through; }
+    mark {
+        background-color: var(--highlight-bg, #fff3a8);
+        color: var(--highlight-text, #1f2328);
+        padding: 0.15em 0.35em;
+        border-radius: 4px;
+    }
+    kbd {
+        display: inline-block;
+        padding: 3px 6px;
+        font-family: "SF Mono", "Menlo", monospace;
+        font-size: 0.82em;
+        line-height: 1.1;
+        color: var(--text-color);
+        vertical-align: middle;
+        background-color: var(--card-bg);
+        border: solid 1px var(--border-strong);
+        border-radius: 6px;
+        box-shadow: inset 0 -1px 0 var(--border-subtle);
+    }
+    sub, sup {
+        font-size: 0.75em;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+    }
+    sup { top: -0.5em; }
+    sub { bottom: -0.25em; }
 
     hr {
         height: 1px;
@@ -96,6 +138,7 @@ private enum ThemeStyles {
         background-color: var(--callout-bg);
         border-radius: 0 8px 8px 0;
         color: var(--text-secondary);
+        overflow-wrap: break-word;
     }
 
     blockquote > p:last-child {
@@ -110,10 +153,18 @@ private enum ThemeStyles {
 
     li {
         margin-bottom: 0.35em;
+        overflow-wrap: break-word;
     }
 
     li > p {
         margin-bottom: 0.4em;
+    }
+
+    /* Nested Lists */
+    li > ul, li > ol {
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        padding-left: 1.5em;
     }
 
     /* Task Lists */
@@ -127,6 +178,12 @@ private enum ThemeStyles {
         align-items: baseline;
         gap: 0.55em;
         margin-bottom: 0.4em;
+        list-style: none;
+    }
+
+    .task-list-content {
+        flex: 1;
+        min-width: 0;
     }
 
     .task-checkbox {
@@ -170,6 +227,7 @@ private enum ThemeStyles {
         background-color: var(--code-inline-bg);
         color: var(--code-inline-text);
         border: 1px solid var(--code-inline-border);
+        overflow-wrap: break-word;
     }
 
     pre {
@@ -179,7 +237,10 @@ private enum ThemeStyles {
         background-color: var(--code-block-bg);
         border: 1px solid var(--border-subtle);
         overflow-x: auto;
+        max-width: 100%;
         line-height: 1.5;
+        white-space: pre;
+        box-sizing: border-box;
     }
 
     pre code {
@@ -189,11 +250,14 @@ private enum ThemeStyles {
         border: none;
         color: var(--code-block-text);
         display: block;
+        overflow-wrap: normal;
+        word-break: normal;
     }
 
     .code-block-container {
         position: relative;
         margin: 1.4em 0;
+        max-width: 100%;
     }
 
     .code-block-container pre {
@@ -221,14 +285,22 @@ private enum ThemeStyles {
     .token-func { color: var(--syn-func); }
     .token-operator { color: var(--syn-operator); }
     .token-property { color: var(--syn-property); }
+    .token-tag { color: var(--syn-keyword); font-weight: 600; }
 
     /* Tables */
+    .table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        margin: 1.4em 0;
+        -webkit-overflow-scrolling: touch;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        margin: 1.4em 0;
+        margin: 0;
         font-size: 0.94em;
-        overflow: hidden;
         border-radius: 7px;
         border: 1px solid var(--border-subtle);
     }
@@ -237,6 +309,7 @@ private enum ThemeStyles {
         padding: 0.65em 1em;
         text-align: left;
         border-bottom: 1px solid var(--border-subtle);
+        overflow-wrap: break-word;
     }
 
     th {
@@ -255,7 +328,7 @@ private enum ThemeStyles {
     }
 
     /* Images */
-    img {
+    img, picture, video {
         max-width: 100%;
         height: auto;
         border-radius: 8px;
@@ -270,6 +343,26 @@ private enum ThemeStyles {
         color: var(--text-muted);
         margin-top: -0.6em;
         margin-bottom: 1.2em;
+    }
+
+    /* Details / Summary */
+    details {
+        margin: 1.2em 0;
+        padding: 0.6em 1em;
+        border-radius: 8px;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-subtle);
+    }
+
+    details summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--heading-color);
+        outline: none;
+    }
+
+    details[open] {
+        padding-bottom: 0.8em;
     }
 
     /* Frontmatter Card */
@@ -294,6 +387,7 @@ private enum ThemeStyles {
         display: flex;
         gap: 0.8em;
         margin-bottom: 0.25em;
+        overflow-wrap: break-word;
     }
 
     .frontmatter-key {
@@ -304,6 +398,8 @@ private enum ThemeStyles {
 
     .frontmatter-val {
         color: var(--text-color);
+        flex: 1;
+        overflow-wrap: break-word;
     }
 
     /* Callouts */
@@ -318,11 +414,21 @@ private enum ThemeStyles {
     .callout-header {
         display: flex;
         align-items: center;
-        gap: 0.5em;
+        gap: 0.55em;
         font-weight: 600;
         font-size: 0.95em;
         color: var(--callout-title-color);
         margin-bottom: 0.4em;
+    }
+
+    details.callout-foldable summary.callout-header {
+        cursor: pointer;
+        user-select: none;
+        list-style: none;
+    }
+
+    details.callout-foldable summary::-webkit-details-marker {
+        display: none;
     }
 
     .callout-icon {
@@ -331,6 +437,11 @@ private enum ThemeStyles {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .callout-title {
+        flex: 1;
     }
 
     .callout-body {
@@ -344,9 +455,17 @@ private enum ThemeStyles {
 
     .callout-note { --callout-border: #007aff; --callout-bg: rgba(0, 122, 255, 0.07); --callout-title-color: #007aff; }
     .callout-tip { --callout-border: #34c759; --callout-bg: rgba(52, 199, 89, 0.07); --callout-title-color: #28a745; }
+    .callout-info { --callout-border: #007aff; --callout-bg: rgba(0, 122, 255, 0.07); --callout-title-color: #007aff; }
     .callout-warning { --callout-border: #ff9500; --callout-bg: rgba(255, 149, 0, 0.08); --callout-title-color: #e67e00; }
     .callout-important { --callout-border: #af52de; --callout-bg: rgba(175, 82, 222, 0.07); --callout-title-color: #9b30d9; }
     .callout-caution { --callout-border: #ff3b30; --callout-bg: rgba(255, 59, 48, 0.08); --callout-title-color: #d9251b; }
+    .callout-success { --callout-border: #28a745; --callout-bg: rgba(40, 167, 69, 0.07); --callout-title-color: #28a745; }
+    .callout-question { --callout-border: #e36209; --callout-bg: rgba(227, 98, 9, 0.07); --callout-title-color: #d05700; }
+    .callout-failure { --callout-border: #cb2431; --callout-bg: rgba(203, 36, 49, 0.08); --callout-title-color: #cb2431; }
+    .callout-danger { --callout-border: #d73a49; --callout-bg: rgba(215, 58, 73, 0.08); --callout-title-color: #d73a49; }
+    .callout-bug { --callout-border: #ea4a5a; --callout-bg: rgba(234, 74, 90, 0.08); --callout-title-color: #ea4a5a; }
+    .callout-example { --callout-border: #6f42c1; --callout-bg: rgba(111, 66, 193, 0.07); --callout-title-color: #6f42c1; }
+    .callout-quote { --callout-border: #6a737d; --callout-bg: rgba(106, 115, 125, 0.07); --callout-title-color: #586069; }
 
     /* Math Equations */
     .math-block {
@@ -356,14 +475,81 @@ private enum ThemeStyles {
         padding: 0.9em;
         border-radius: 8px;
         background-color: var(--card-bg);
-        font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", "SF Pro Text", serif;
+        font-family: "KaTeX_Main", "Cambria Math", "Latin Modern Math", "STIX Two Math", "SF Pro Text", serif;
         font-size: 1.1em;
         overflow-x: auto;
+        max-width: 100%;
     }
 
     .math-inline {
-        font-family: "Cambria Math", "Latin Modern Math", "STIX Two Math", serif;
+        font-family: "KaTeX_Main", "Cambria Math", "Latin Modern Math", "STIX Two Math", serif;
         padding: 0 0.2em;
+    }
+
+    /* Wikilinks & Embeds */
+    .wikilink {
+        font-weight: 500;
+        border-bottom: 1px dashed var(--accent-color);
+    }
+
+    .embedded-note-link {
+        margin: 0.8em 0;
+        padding: 0.5em 0.8em;
+        background-color: var(--card-bg);
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+    }
+
+    /* Mermaid Diagrams */
+    .mermaid-block {
+        margin: 1.4em 0;
+        padding: 1.2em;
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        overflow-x: auto;
+        text-align: center;
+    }
+
+    .mermaid-block pre.mermaid {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9em;
+        display: inline-block;
+        text-align: left;
+    }
+
+    /* Footnotes */
+    .footnotes {
+        margin-top: 3em;
+        font-size: 0.88em;
+        color: var(--text-secondary);
+    }
+
+    .footnotes hr {
+        margin-bottom: 1.5em;
+    }
+
+    .footnotes ol {
+        padding-left: 1.5em;
+    }
+
+    .footnotes li {
+        margin-bottom: 0.5em;
+    }
+
+    .footnote-ref a {
+        text-decoration: none;
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    .footnote-backref {
+        text-decoration: none;
+        color: var(--accent-color);
+        margin-left: 0.3em;
     }
     """
 
@@ -386,6 +572,8 @@ private enum ThemeStyles {
         --table-th-bg: #f2f2f5;
         --table-alt-bg: rgba(0, 0, 0, 0.018);
         --frontmatter-bg: #fafafc;
+        --highlight-bg: #fff3a8;
+        --highlight-text: #1f2328;
 
         --syn-keyword: #ad3da4;
         --syn-string: #c41a16;
@@ -416,6 +604,8 @@ private enum ThemeStyles {
             --table-th-bg: #262629;
             --table-alt-bg: rgba(255, 255, 255, 0.025);
             --frontmatter-bg: #252528;
+            --highlight-bg: #634d00;
+            --highlight-text: #fff3a8;
 
             --syn-keyword: #fc5fa3;
             --syn-string: #fc6a5d;
@@ -450,6 +640,8 @@ private enum ThemeStyles {
         --table-th-bg: #f6f8fa;
         --table-alt-bg: #ffffff;
         --frontmatter-bg: #f6f8fa;
+        --highlight-bg: #fff8c5;
+        --highlight-text: #1f2328;
 
         --syn-keyword: #cf222e;
         --syn-string: #0a3069;
@@ -480,6 +672,8 @@ private enum ThemeStyles {
             --table-th-bg: #161b22;
             --table-alt-bg: #0d1117;
             --frontmatter-bg: #161b22;
+            --highlight-bg: #5a3e00;
+            --highlight-text: #ffdf5d;
 
             --syn-keyword: #ff7b72;
             --syn-string: #a5d6ff;
@@ -514,6 +708,8 @@ private enum ThemeStyles {
         --table-th-bg: #e4e4e7;
         --table-alt-bg: transparent;
         --frontmatter-bg: #f4f4f5;
+        --highlight-bg: #e4e4e7;
+        --highlight-text: #18181b;
 
         --syn-keyword: #71717a;
         --syn-string: #52525b;
@@ -544,6 +740,8 @@ private enum ThemeStyles {
             --table-th-bg: #27272a;
             --table-alt-bg: transparent;
             --frontmatter-bg: #18181b;
+            --highlight-bg: #3f3f46;
+            --highlight-text: #f4f4f5;
 
             --syn-keyword: #a1a1aa;
             --syn-string: #d4d4d8;
@@ -578,6 +776,8 @@ private enum ThemeStyles {
         --table-th-bg: #f0f0f0;
         --table-alt-bg: #fafafa;
         --frontmatter-bg: #f7f7f7;
+        --highlight-bg: #fff0b3;
+        --highlight-text: #2b2b2b;
 
         --syn-keyword: #8b0000;
         --syn-string: #006400;
@@ -608,6 +808,8 @@ private enum ThemeStyles {
             --table-th-bg: #2b2b2b;
             --table-alt-bg: #1f1f1f;
             --frontmatter-bg: #242424;
+            --highlight-bg: #4a3800;
+            --highlight-text: #fff0b3;
 
             --syn-keyword: #ff8787;
             --syn-string: #8ce99a;

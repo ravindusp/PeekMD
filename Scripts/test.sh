@@ -12,4 +12,4 @@ echo "=== Running Markdown Finder Test Suites ==="
 cd "$PROJECT_DIR"
 swift test
 
-echo "🎉 ALL 21 TEST SUITES PASSED WITH 0 FAILURES!"
+echo "🎉 ALL TEST SUITES PASSED WITH 0 FAILURES!"

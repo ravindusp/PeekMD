@@ -61,6 +61,8 @@ mkdir -p "$QL_DIR/Contents/MacOS"
 mkdir -p "$QL_DIR/Contents/Resources"
 cp "$PROJECT_DIR/MarkdownQuickLookExtension/Info.plist" "$QL_DIR/Contents/Info.plist"
 
+CHECKOUTS_DIR="$PROJECT_DIR/Packages/MarkdownRenderer/.build/checkouts"
+
 swiftc -O \
     -sdk "$SDK_PATH" \
     -target arm64-apple-macosx13.0 \
@@ -68,6 +70,9 @@ swiftc -O \
     -module-name MarkdownQuickLookExtension \
     -Xlinker -e -Xlinker _NSExtensionMain \
     -I "$RENDERER_BUILD_DIR/Modules" \
+    -I "$CHECKOUTS_DIR/swift-markdown/Sources/CAtomic/include" \
+    -I "$CHECKOUTS_DIR/swift-cmark/src/include" \
+    -I "$CHECKOUTS_DIR/swift-cmark/extensions/include" \
     -L "$RENDERER_BUILD_DIR" \
     -lMarkdownRenderer \
     -F "$SDK_PATH/System/Library/Frameworks" \
@@ -100,6 +105,9 @@ swiftc -O \
     -emit-executable \
     -module-name PeekMD \
     -I "$RENDERER_BUILD_DIR/Modules" \
+    -I "$CHECKOUTS_DIR/swift-markdown/Sources/CAtomic/include" \
+    -I "$CHECKOUTS_DIR/swift-cmark/src/include" \
+    -I "$CHECKOUTS_DIR/swift-cmark/extensions/include" \
     -L "$RENDERER_BUILD_DIR" \
     -lMarkdownRenderer \
     -F "$SDK_PATH/System/Library/Frameworks" \
