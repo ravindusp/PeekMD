@@ -7,11 +7,11 @@ PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 "$PROJECT_DIR/Scripts/build.sh"
 
 APP_SRC="$PROJECT_DIR/build/Release/MarkdownFinder.app"
-DEST_DIR="$HOME/Applications"
+DEST_DIR="/Applications"
 DEST_APP="$DEST_DIR/MarkdownFinder.app"
 
-mkdir -p "$DEST_DIR"
-echo "--> Installing to $DEST_APP..."
+# Clean up any conflicting instances
+rm -rf "$HOME/Applications/MarkdownFinder.app"
 rm -rf "$DEST_APP"
 cp -R "$APP_SRC" "$DEST_APP"
 

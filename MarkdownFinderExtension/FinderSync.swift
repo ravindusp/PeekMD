@@ -81,7 +81,8 @@ final class FinderSync: FIFinderSync {
     // MARK: - Actions
 
     @objc
-    private func createMarkdownFile(_ sender: Any?) {
+    func createMarkdownFile(_ sender: Any?) {
+        NSLog("[MarkdownFinderExtension] createMarkdownFile action triggered")
         var resolvedFolder = FIFinderSyncController.default().targetedURL()
 
         // 1. Fallback to selected item directory if targetedURL is nil

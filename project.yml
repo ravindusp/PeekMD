@@ -1,0 +1,108 @@
+name: MarkdownFinder
+options:
+  bundleIdPrefix: com.oneloop
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "16.4"
+  generateEmptyDirectories: false
+  createIntermediateGroups: true
+  defaultConfig: Debug
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    CODE_SIGN_STYLE: Automatic
+
+packages:
+  MarkdownRenderer:
+    path: Packages/MarkdownRenderer
+
+targets:
+  MarkdownFinder:
+    type: application
+    platform: macOS
+    sources:
+      - path: MarkdownFinderApp
+        excludes:
+          - "**/.DS_Store"
+      - path: Shared
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: MarkdownFinderApp/MarkdownFinderApp.entitlements
+        INFOPLIST_FILE: MarkdownFinderApp/Info.plist
+        GENERATE_INFOPLIST_FILE: false
+        PRODUCT_NAME: MarkdownFinder
+        COMBINE_HIDPI_IMAGES: true
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/../Frameworks"
+    dependencies:
+      - package: MarkdownRenderer
+      - target: MarkdownFinderExtension
+        embed: true
+        codeSign: true
+        copyPhase:
+          destination: plugins
+      - target: MarkdownQuickLookExtension
+        embed: true
+        codeSign: true
+        copyPhase:
+          destination: plugins
+
+  MarkdownFinderExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: MarkdownFinderExtension
+        excludes:
+          - "**/.DS_Store"
+      - path: Shared
+        excludes:
+          - "**/.DS_Store"
+          - LocationManager.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder.FinderSync
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: MarkdownFinderExtension/MarkdownFinderExtension.entitlements
+        INFOPLIST_FILE: MarkdownFinderExtension/Info.plist
+        GENERATE_INFOPLIST_FILE: false
+        PRODUCT_NAME: MarkdownFinderExtension
+        COMBINE_HIDPI_IMAGES: true
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/../Frameworks"
+          - "@executable_path/../../../../Frameworks"
+    dependencies: []
+
+  MarkdownQuickLookExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: MarkdownQuickLookExtension
+        excludes:
+          - "**/.DS_Store"
+      - path: Shared
+        excludes:
+          - "**/.DS_Store"
+          - LocationManager.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.oneloop.MarkdownFinder.QuickLook
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_ENTITLEMENTS: MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements
+        INFOPLIST_FILE: MarkdownQuickLookExtension/Info.plist
+        GENERATE_INFOPLIST_FILE: false
+        PRODUCT_NAME: MarkdownQuickLookExtension
+        COMBINE_HIDPI_IMAGES: true
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/../Frameworks"
+          - "@executable_path/../../../../Frameworks"
+    dependencies:
+      - package: MarkdownRenderer

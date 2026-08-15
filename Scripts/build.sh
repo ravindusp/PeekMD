@@ -50,7 +50,7 @@ swiftc -O \
     "$PROJECT_DIR/Shared/SharedConstants.swift" \
     "$PROJECT_DIR/Shared/FilenameResolver.swift" \
     "$PROJECT_DIR/Shared/SharedPreferences.swift" \
-    "$PROJECT_DIR/MarkdownFinderExtension/MarkdownFileCreator.swift" \
+    "$PROJECT_DIR/Shared/MarkdownFileCreator.swift" \
     "$PROJECT_DIR/MarkdownFinderExtension/FinderSync.swift" \
     -o "$EXT_DIR/Contents/MacOS/MarkdownFinderExtension"
 
@@ -102,7 +102,7 @@ swiftc -O \
     "$PROJECT_DIR/Shared/FilenameResolver.swift" \
     "$PROJECT_DIR/Shared/SharedPreferences.swift" \
     "$PROJECT_DIR/Shared/LocationManager.swift" \
-    "$PROJECT_DIR/MarkdownFinderExtension/MarkdownFileCreator.swift" \
+    "$PROJECT_DIR/Shared/MarkdownFileCreator.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/AppState.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/Components/WebView.swift" \
     "$PROJECT_DIR/MarkdownFinderApp/Views/Components/StatusBadgeView.swift" \
