@@ -145,7 +145,7 @@ public final class AppState: ObservableObject {
 
     private func loadSampleDocument() {
         let sample = """
-        # Welcome to Markdown Finder 🚀
+        # Welcome to PeekMD 🚀
 
         A native macOS utility that brings **"Create New Markdown File"** to your Finder background right-click menu and turns Quick Look (Spacebar) into an instant Markdown previewer.
 
@@ -175,7 +175,7 @@ public final class AppState: ObservableObject {
         ## 💡 Obsidian Callouts
 
         > [!NOTE] Native Apple Experience
-        > Markdown Finder works directly on standard filesystem folders. No vaults, databases, or imports required.
+        > PeekMD works directly on standard filesystem folders. No vaults, databases, or imports required.
 
         > [!TIP] Spacebar Previews
         > Simply select any `.md` or `.markdown` file in Finder and press **Space** to see full typography.

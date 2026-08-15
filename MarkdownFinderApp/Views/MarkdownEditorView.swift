@@ -403,7 +403,7 @@ public struct MarkdownEditorView: View {
             }) {
                 Image(systemName: "gearshape")
             }
-            .help("Markdown Finder Settings & Monitored Folders")
+            .help("PeekMD Settings & Monitored Folders")
         }
     }
 
@@ -481,7 +481,7 @@ struct SettingsSheetView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Markdown Finder Settings")
+                Text("PeekMD Settings")
                     .font(.headline)
                 Spacer()
                 Button("Done") {

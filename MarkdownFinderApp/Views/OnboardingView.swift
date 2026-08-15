@@ -127,7 +127,7 @@ public struct OnboardingView: View {
     private func testCreateMarkdownFile() {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first ?? FileManager.default.homeDirectoryForCurrentUser
         let creator = MarkdownFileCreator()
-        if let createdURL = creator.createMarkdownFile(in: docs, initialContent: "# Test Markdown File\n\nCreated successfully via Markdown Finder!") {
+        if let createdURL = creator.createMarkdownFile(in: docs, initialContent: "# Test Markdown File\n\nCreated successfully via PeekMD!") {
             creationSuccessMessage = "✓ Created \(createdURL.lastPathComponent)"
             NSWorkspace.shared.activateFileViewerSelecting([createdURL])
         }

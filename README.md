@@ -65,6 +65,9 @@ PeekMD (MarkdownFinder.app)
 # Build the complete .app bundle with embedded extensions
 ./Scripts/build.sh
 
+# Package release DMG installer (v0.1)
+./Scripts/package_dmg.sh
+
 # Install to ~/Applications and register Finder extensions
 ./Scripts/install_and_register.sh
 ```

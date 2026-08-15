@@ -85,6 +85,15 @@ swiftc -O \
 echo "--> Building Main macOS Application..."
 cp "$PROJECT_DIR/MarkdownFinderApp/Info.plist" "$APP_DIR/Contents/Info.plist"
 
+# Copy App Icon and WebP assets into Resources
+if [ -f "$PROJECT_DIR/Assets/AppIcon.icns" ]; then
+    cp "$PROJECT_DIR/Assets/AppIcon.icns" "$APP_DIR/Contents/Resources/AppIcon.icns"
+fi
+if [ -f "$PROJECT_DIR/Assets/AppIcon.webp" ]; then
+    cp "$PROJECT_DIR/Assets/AppIcon.webp" "$APP_DIR/Contents/Resources/AppIcon.webp"
+    cp "$PROJECT_DIR/Assets/icon.webp" "$APP_DIR/Contents/Resources/icon.webp"
+fi
+
 swiftc -O \
     -sdk "$SDK_PATH" \
     -target arm64-apple-macosx13.0 \
