@@ -117,11 +117,11 @@ swiftc -O \
     "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.swift" \
     -o "$APP_DIR/Contents/MacOS/MarkdownFinder"
 
-# 5. Ad-Hoc Code Signing
+# 5. Ad-Hoc Code Signing (inside-out)
 echo "--> Signing bundles..."
 codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownFinderExtension/MarkdownFinderExtension.entitlements" "$EXT_DIR"
 codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements" "$QL_DIR"
-codesign --force --sign - --deep --entitlements "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.entitlements" "$APP_DIR"
+codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.entitlements" "$APP_DIR"
 
 echo "--> Verifying code signature..."
 codesign -v --deep --strict "$APP_DIR"
