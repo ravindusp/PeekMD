@@ -35,3 +35,5 @@ Packages/*/.swiftpm/
 test_bin/
 *.dylib
 *.app
+*.dmg
+PeekMD v1.0/
