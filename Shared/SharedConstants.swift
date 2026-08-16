@@ -1,7 +1,7 @@
 import Foundation
 
 public enum SharedConstants {
-    public static let appGroupIdentifier = "group.com.oneloop.markdownfinder"
+    public static let appGroupIdentifier = "7PMBK2ZW83.group.com.oneloop.markdownfinder"
     public static let appBundleIdentifier = "com.oneloop.PeekMD"
     public static let finderExtensionIdentifier = "com.oneloop.PeekMD.FinderSync"
     public static let quickLookExtensionIdentifier = "com.oneloop.PeekMD.QuickLook"

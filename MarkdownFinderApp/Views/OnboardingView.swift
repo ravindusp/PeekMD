@@ -34,7 +34,7 @@ public struct OnboardingView: View {
                             .font(.title3.weight(.semibold))
                     }
 
-                    Text("1. Click **Open Extensions Settings** and ensure **PeekMD Extension** is toggled ON under Finder Extensions.\n2. Click **Relaunch Finder** so macOS applies the extension to your active windows.")
+                    Text("Click **Open Extensions Settings** and ensure **PeekMD Extension** is toggled ON under Finder Extensions.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
 
@@ -45,20 +45,6 @@ public struct OnboardingView: View {
                             Label("Open Extensions Settings...", systemImage: "arrow.up.forward.app")
                         }
                         .buttonStyle(.borderedProminent)
-
-                        Button(action: {
-                            state.restartFinder()
-                        }) {
-                            Label("Relaunch Finder", systemImage: "arrow.counterclockwise")
-                        }
-                        .buttonStyle(.bordered)
-
-                        Button(action: {
-                            state.registerAndFixExtensions()
-                        }) {
-                            Label("Repair Extension", systemImage: "wrench.and.screwdriver")
-                        }
-                        .buttonStyle(.bordered)
                     }
                 }
                 .padding()

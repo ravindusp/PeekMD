@@ -42,6 +42,8 @@ targets:
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/../Frameworks"
+    scheme:
+      gatherCoverageData: false
     dependencies:
       - package: MarkdownRenderer
       - target: MarkdownFinderExtension
@@ -107,3 +109,4 @@ targets:
           - "@executable_path/../../../../Frameworks"
     dependencies:
       - package: MarkdownRenderer
+

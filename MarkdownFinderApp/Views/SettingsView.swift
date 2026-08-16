@@ -28,21 +28,7 @@ public struct SettingsView: View {
                         }) {
                             Label("Extensions Settings...", systemImage: "arrow.up.forward.app")
                         }
-                        .buttonStyle(.bordered)
-
-                        Button(action: {
-                            state.restartFinder()
-                        }) {
-                            Label("Relaunch Finder", systemImage: "arrow.counterclockwise")
-                        }
-                        .buttonStyle(.bordered)
-
-                        Button(action: {
-                            state.registerAndFixExtensions()
-                        }) {
-                            Label("Repair Extension", systemImage: "wrench.and.screwdriver")
-                        }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.borderedProminent)
                     }
                 }
 

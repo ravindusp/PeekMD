@@ -58,26 +58,17 @@ public final class LocationManager: @unchecked Sendable {
             ))
         }
 
-        // 3. External Volumes
-        let volumesURL = URL(fileURLWithPath: "/Volumes", isDirectory: true)
-        if let volumes = try? FileManager.default.contentsOfDirectory(
-            at: volumesURL,
-            includingPropertiesForKeys: nil,
-            options: [.skipsHiddenFiles]
-        ) {
-            for vol in volumes {
-                // Skip root symlink if present
-                if vol.path != "/" && vol.path != "/Volumes/Macintosh HD" {
-                    locations.append(MonitoredLocation(
-                        id: vol.path,
-                        name: vol.lastPathComponent,
-                        path: vol.path,
-                        url: vol,
-                        isSystemOrSpecial: true,
-                        isAvailable: true
-                    ))
-                }
-            }
+        // 3. External Volumes Root
+        if preferences.monitorExternalVolumes {
+            let volumesURL = URL(fileURLWithPath: "/Volumes", isDirectory: true)
+            locations.append(MonitoredLocation(
+                id: "external_volumes",
+                name: "External Volumes (/Volumes)",
+                path: volumesURL.path,
+                url: volumesURL,
+                isSystemOrSpecial: true,
+                isAvailable: true
+            ))
         }
 
         return locations

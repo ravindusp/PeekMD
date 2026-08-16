@@ -22,10 +22,20 @@ public struct MarkdownWebView: NSViewRepresentable {
 
     public func makeNSView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
-        config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        let prefs = WKWebpagePreferences()
+        prefs.allowsContentJavaScript = true
+        config.defaultWebpagePreferences = prefs
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.setValue(false, forKey: "drawsBackground")
+
+        let html = MarkdownRenderer.render(
+            markdown: markdown,
+            baseURL: baseURL,
+            theme: theme,
+            options: options
+        )
+        webView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
         return webView
     }
 
@@ -36,8 +46,6 @@ public struct MarkdownWebView: NSViewRepresentable {
             theme: theme,
             options: options
         )
-
-        let targetBaseURL = baseURL ?? Bundle.main.bundleURL
-        nsView.loadHTMLString(html, baseURL: targetBaseURL)
+        nsView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
     }
 }

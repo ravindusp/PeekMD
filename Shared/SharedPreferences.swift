@@ -145,45 +145,19 @@ public final class SharedPreferences: @unchecked Sendable {
     public func resolvedMonitoredURLs() -> Set<URL> {
         var urls = Set<URL>()
 
-        // 1. Root, Users, and Real Home
-        urls.insert(URL(fileURLWithPath: "/", isDirectory: true))
-        urls.insert(URL(fileURLWithPath: "/Users", isDirectory: true))
+        // 1. Home directory
         let realHome = SharedPreferences.realUserHomeDirectory()
-        urls.insert(realHome)
-
         if monitorHomeDirectory {
-            urls.insert(realHome.appendingPathComponent("Desktop", isDirectory: true))
-            urls.insert(realHome.appendingPathComponent("Documents", isDirectory: true))
-            urls.insert(realHome.appendingPathComponent("Downloads", isDirectory: true))
-
-            let iCloud = realHome.appendingPathComponent("Library/Mobile Documents/com~apple~CloudDocs", isDirectory: true)
-            if FileManager.default.fileExists(atPath: iCloud.path) {
-                urls.insert(iCloud)
-                urls.insert(iCloud.appendingPathComponent("Documents", isDirectory: true))
-                urls.insert(iCloud.appendingPathComponent("Desktop", isDirectory: true))
-            }
+            urls.insert(realHome)
         }
 
         if monitorExternalVolumes {
-            let volumesURL = URL(fileURLWithPath: "/Volumes", isDirectory: true)
-            urls.insert(volumesURL)
-            if let volumeContents = try? FileManager.default.contentsOfDirectory(
-                at: volumesURL,
-                includingPropertiesForKeys: [.isVolumeKey],
-                options: [.skipsHiddenFiles]
-            ) {
-                for vol in volumeContents {
-                    urls.insert(vol)
-                }
-            }
+            urls.insert(URL(fileURLWithPath: "/Volumes", isDirectory: true))
         }
 
         for path in monitoredFolderPaths {
             let folderURL = URL(fileURLWithPath: path, isDirectory: true)
-            var isDir: ObjCBool = false
-            if FileManager.default.fileExists(atPath: folderURL.path, isDirectory: &isDir), isDir.boolValue {
-                urls.insert(folderURL)
-            }
+            urls.insert(folderURL)
         }
 
         return urls
