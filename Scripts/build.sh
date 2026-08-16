@@ -134,11 +134,17 @@ swiftc -O \
     "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.swift" \
     -o "$APP_DIR/Contents/MacOS/PeekMD"
 
-# 5. Ad-Hoc Code Signing (inside-out)
-echo "--> Signing bundles..."
-codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownFinderExtension/MarkdownFinderExtension.entitlements" "$EXT_DIR"
-codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements" "$QL_DIR"
-codesign --force --sign - --entitlements "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.entitlements" "$APP_DIR"
+# 5. Code Signing with Developer Identity (inside-out)
+echo "--> Signing bundles with Developer Identity..."
+SIGN_IDENTITY=$(security find-identity -v -p codesigning | grep "Apple Development" | head -1 | awk -F'"' '{print $2}')
+if [ -z "$SIGN_IDENTITY" ]; then
+    SIGN_IDENTITY="-"
+fi
+echo "Using code sign identity: $SIGN_IDENTITY"
+
+codesign --force --options runtime --sign "$SIGN_IDENTITY" --entitlements "$PROJECT_DIR/MarkdownFinderExtension/MarkdownFinderExtension.entitlements" "$EXT_DIR"
+codesign --force --options runtime --sign "$SIGN_IDENTITY" --entitlements "$PROJECT_DIR/MarkdownQuickLookExtension/MarkdownQuickLookExtension.entitlements" "$QL_DIR"
+codesign --force --options runtime --sign "$SIGN_IDENTITY" --entitlements "$PROJECT_DIR/MarkdownFinderApp/MarkdownFinderApp.entitlements" "$APP_DIR"
 
 echo "--> Verifying code signature..."
 codesign -v --deep --strict "$APP_DIR"
