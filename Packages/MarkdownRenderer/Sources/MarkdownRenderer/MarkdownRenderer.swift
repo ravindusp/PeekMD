@@ -13,8 +13,8 @@ public enum MarkdownRenderer {
             options: options
         )
 
-        let mathCSS = options.enableMath ? "\n<style>\n\(EmbeddedScripts.katexCSS)\n</style>" : ""
-        let mathJS = options.enableMath ? "\n\(EmbeddedScripts.katexScript)" : ""
+        let mathCSS = options.enableMath ? "\n<style>\n\(KaTeXBundle.katexCSS)\n\(EmbeddedScripts.katexCSS)\n</style>" : ""
+        let mathJS = options.enableMath ? "\n<script>\n\(KaTeXBundle.katexJS)\n\(KaTeXBundle.autoRenderJS)\n</script>\n\(EmbeddedScripts.katexScript)" : ""
 
         let completeHTML = """
         <!DOCTYPE html>

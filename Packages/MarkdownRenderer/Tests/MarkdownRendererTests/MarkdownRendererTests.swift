@@ -390,6 +390,16 @@ final class MarkdownRendererTests: XCTestCase {
         XCTAssertFalse(html.contains("class=\"math-block\""))
     }
 
+    func testFullPageRenderWithKaTeXBundle() {
+        let md = """
+        \\[\\hat y=p+\\hat r\\]
+        """
+        let html = MarkdownRenderer.render(markdown: md)
+        XCTAssertTrue(html.contains("<div class=\"math-block\">\\[\\hat y=p+\\hat r\\]</div>"))
+        XCTAssertTrue(html.contains("katex"))
+        XCTAssertTrue(html.contains("renderMathInElement"))
+    }
+
     // MARK: - Safe Raw HTML & Sanitization (P0)
 
     func testSafeHTMLGitHubREADME() {

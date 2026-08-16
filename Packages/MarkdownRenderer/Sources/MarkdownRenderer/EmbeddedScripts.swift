@@ -30,7 +30,7 @@ public enum EmbeddedScripts {
 
     public static let katexScript = """
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    function renderAllMath() {
         if (typeof renderMathInElement === "function") {
             renderMathInElement(document.body, {
                 delimiters: [
@@ -42,7 +42,12 @@ public enum EmbeddedScripts {
                 throwOnError: false
             });
         }
-    });
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAllMath);
+    } else {
+        renderAllMath();
+    }
     </script>
     """
 }
