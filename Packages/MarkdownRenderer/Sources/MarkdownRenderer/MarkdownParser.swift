@@ -19,9 +19,13 @@ public final class MarkdownParser {
             processedMarkdown = remainingMD
         }
 
-        // 2. Preprocess Display Math Blocks ($$...$$)
+        var inlineMathTable: [String: String] = [:]
+
+        // 2. Preprocess Math (Display blocks & Inlines)
         if options.enableMath {
-            processedMarkdown = preprocessDisplayMath(processedMarkdown)
+            let mathResult = MathParser.preprocessMath(processedMarkdown)
+            processedMarkdown = mathResult.markdown
+            inlineMathTable = mathResult.inlineMathTable
         }
 
         // 3. Preprocess Footnotes
@@ -43,6 +47,11 @@ public final class MarkdownParser {
         // 6. Append Footnotes Section if any definitions were collected
         if !footnoteDefinitions.isEmpty {
             bodyHTML += renderFootnotesSection(footnoteDefinitions, baseURL: baseURL, options: options)
+        }
+
+        // 7. Restore Inline Math Placeholders
+        if options.enableMath && !inlineMathTable.isEmpty {
+            bodyHTML = MathParser.restoreInlineMath(in: bodyHTML, table: inlineMathTable)
         }
 
         return frontmatterHTML + bodyHTML
@@ -109,15 +118,6 @@ public final class MarkdownParser {
         return html
     }
 
-    // MARK: - Display Math Preprocessing
-
-    private static func preprocessDisplayMath(_ text: String) -> String {
-        // Transform $$...$$ blocks into ```math ... ``` fences so cmark-gfm parses them as block codes
-        let pattern = #"(?ms)^\$\$\s*\n(.*?)\n\$\$$"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return text }
-        let range = NSRange(text.startIndex..<text.endIndex, in: text)
-        return regex.stringByReplacingMatches(in: text, options: [], range: range, withTemplate: "```math\n$1\n```")
-    }
 
     // MARK: - Footnotes Preprocessing & Rendering
 

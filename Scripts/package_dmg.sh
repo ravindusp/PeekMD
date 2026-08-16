@@ -9,7 +9,7 @@ fi
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$PROJECT_DIR/build/Release"
 APP_PATH="$BUILD_DIR/PeekMD.app"
-VERSION="1.0.0"
+VERSION="1.0.1"
 DMG_NAME="PeekMD-v${VERSION}.dmg"
 DMG_PATH="$BUILD_DIR/$DMG_NAME"
 STAGING_DIR="$BUILD_DIR/dmg_staging"

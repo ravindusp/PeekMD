@@ -318,6 +318,78 @@ final class MarkdownRendererTests: XCTestCase {
         XCTAssertTrue(html.contains("$50 and $100"))
     }
 
+    func testLaTeXBracketDisplayMathUserReportedBug() {
+        let md = """
+        The contribution is an experimentally tested hybrid framework:
+
+        \\[ \\text{Deterministic harmonisation} \\rightarrow \\text{Material prior} \\rightarrow \\text{Real-EPD calibration} \\rightarrow \\text{Uncertainty/OOD} \\rightarrow \\text{Abstain or provisional estimate} \\rightarrow \\text{Human validation} \\]
+
+        The framework is compared against:
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("class=\"math-block\""), "Should render display math block for \\[ ... \\]")
+        XCTAssertTrue(html.contains("\\text{Deterministic harmonisation} \\rightarrow \\text{Material prior}"), "Should preserve math content with arrows and formatting")
+        XCTAssertFalse(html.contains("<p>[ \\text{Deterministic"), "Should not render raw stripped brackets as a paragraph")
+    }
+
+    func testLaTeXBracketMultilineDisplayMath() {
+        let md = """
+        \\[
+        \\sum_{i=1}^{n} X_i = \\mu
+        \\]
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("class=\"math-block\""))
+        XCTAssertTrue(html.contains("\\[\\sum_{i=1}^{n} X_i = \\mu\\]"))
+    }
+
+    func testSingleLineDoubleDollarDisplayMath() {
+        let md = """
+        $$ a^2 + b^2 = c^2 $$
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("class=\"math-block\""))
+        XCTAssertTrue(html.contains("\\[a^2 + b^2 = c^2\\]"))
+    }
+
+    func testLaTeXEnvironments() {
+        let md = """
+        \\begin{align}
+        a &= b + c \\\\
+        d &= e + f
+        \\end{align}
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("class=\"math-block\""))
+        XCTAssertTrue(html.contains("\\begin{align}"))
+        XCTAssertTrue(html.contains("\\end{align}"))
+    }
+
+    func testInlineLaTeXParenMath() {
+        let md = """
+        Given \\( f(x) = \\frac{1}{x} \\) and \\( x \\neq 0 \\).
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("class=\"math-inline\""))
+        XCTAssertTrue(html.contains("\\(f(x) = \\frac{1}{x}\\)"))
+        XCTAssertTrue(html.contains("\\(x \\neq 0\\)"))
+    }
+
+    func testMathInCodeBlocksPreserved() {
+        let md = """
+        ```swift
+        let bracket = "\\[ not math \\]"
+        let price = "$50"
+        ```
+        And inline code: `\\[ not math \\]` and `$not_math$`.
+        """
+        let html = MarkdownRenderer.renderHTMLFragment(markdown: md)
+        XCTAssertTrue(html.contains("&quot;\\[ not math \\]&quot;"))
+        XCTAssertTrue(html.contains("<code>\\[ not math \\]</code>"))
+        XCTAssertTrue(html.contains("<code>$not_math$</code>"))
+        XCTAssertFalse(html.contains("class=\"math-block\""))
+    }
+
     // MARK: - Safe Raw HTML & Sanitization (P0)
 
     func testSafeHTMLGitHubREADME() {

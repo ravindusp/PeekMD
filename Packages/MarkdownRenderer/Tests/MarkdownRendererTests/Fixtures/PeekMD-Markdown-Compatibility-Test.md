@@ -203,12 +203,15 @@ Malicious HTML (Must be stripped/sanitized safely):
 
 ## 7. Math / LaTeX Typesetting
 
-Inline math: When $E = mc^2$, energy and mass are equivalent.
+Inline math: When $E = mc^2$, energy and mass are equivalent. Or with LaTeX delimiters: \( f(x) = x^2 \).
 
-Display math:
+Display math with $$:
 $$
 \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
 $$
+
+Display math with \[ ... \]:
+\[ \text{Deterministic harmonisation} \rightarrow \text{Material prior} \rightarrow \text{Real-EPD calibration} \]
 
 ---
 
