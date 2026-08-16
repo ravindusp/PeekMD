@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="Assets/AppIcon_1024.png" alt="PeekMD icon" width="112">
+<img src="Assets/icon.webp" alt="PeekMD icon" width="112">
 
 # PeekMD
 
